@@ -412,7 +412,7 @@ class MyFiles extends React.Component {
                 </Autocomplete>
                 <IconButton
                 id="seachUndo"
-                marginLeft={403}
+                marginLeft={437}
                 marginTop={-40}
                 onClick={()=>{
                   this.filterFiles('all')
