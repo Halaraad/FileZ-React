@@ -17,6 +17,11 @@ a:active {
   border-top: solid 6px white;
   border-bottom: solid 6px white;
 }
+.actbin {
+  border-left: solid 6px red;
+  border-top: solid 6px white;
+  border-bottom: solid 6px white;
+}
 .main {
   height: 100%;
   width: 100%;
@@ -28,10 +33,12 @@ a:active {
   height: 100%;
   width: 200px;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
 }
 .logo {
   font-size: 30px;
-  margin-bottom: 148px;
 }
 .logo img {
   margin: 20px 43px;
@@ -40,19 +47,8 @@ a:active {
   margin-left: 64px;
   margin-top: -40px;
 }
-.btnAdd {
-  height: 30px;
-  width: 110px;
-  border: solid 1px #86c7fd;
-  border-radius: 5px;
-  margin: 38px;
-}
-.btnAdd a {
-  margin-top: 5px;
-  position: absolute;
-}
 .myfile {
-  height: 30px;
+  height: 5%;
   width: 200px;
 }
 .myfile img {
@@ -65,7 +61,7 @@ a:active {
   margin-top: 6px;
 }
 .bin {
-  height: 30px;
+  height: 5%;
   width: 200px;
 
   margin-top: 10px;
@@ -81,9 +77,24 @@ a:active {
   width: 181px;
   margin-top: 3px;
 }
-
+.admin {
+  height: 5%;
+  width: 200px;
+  margin-top: 10px;
+}
+.admin img {
+  height: 26px;
+  margin-left: 50px;
+  margin-left: 41px;
+}
+.admin a {
+  margin-left: 4px;
+  position: absolute;
+  width: 181px;
+  margin-top: 3px;
+}
 .storimg {
-  margin-top: 70px;
+  margin-top: 8%;
   display: flex;
 }
 .storimg img {
@@ -104,7 +115,6 @@ a:active {
   margin-top: 10px;
 }
 .szliderbar {
- 
   height: 15px;
   border-right: 1px solid #7e87a1;
   background: rgb(14, 120, 190);
@@ -113,3 +123,7 @@ a:active {
   font-size: 0.8rem;
   margin-left: 30px;
 }
+.sorage {
+  margin-top: 100px
+}
+

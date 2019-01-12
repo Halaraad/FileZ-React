@@ -20,14 +20,14 @@
 
   font-size: 30px;
   font-weight: bolder;
-  color: #427fed;
+  color: #607D8B;
  
 }
 .tableHader{
   background-color: #ffffff;
 }
 
-container {
+.container {
   display: block;
   position: relative;
   padding-left: 35px;

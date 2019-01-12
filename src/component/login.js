@@ -158,7 +158,7 @@ class Login extends React.Component {
                              
   cookies.set('token', response.data, { path: '/', expires: new Date(Date.now()+604800000)});                              
                             
-                            window.location.href='/' 
+                            window.location.href='/myfiles' 
                           })
                           .catch(function (error) {
                             if (error.response) {

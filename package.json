@@ -11,6 +11,7 @@
     "rc-progress": "^2.2.6",
     "react": "^16.7.0",
     "react-autocomplete": "^1.8.1",
+    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",
     "react-dropzone": "^8.0.3",
     "react-fileupload-progress": "^0.4.2",
@@ -29,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:5000/",
   "eslintConfig": {
     "extends": "react-app"
   },

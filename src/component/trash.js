@@ -6,6 +6,7 @@ import axios from  'axios';
 import PDFIcon from '../assets/pdf.svg';
 import FileIcon from '../assets/file.svg';
 import videoIcon from '../assets/video-file.svg';
+import Show from "./show.js";
 const cookies = new Cookies();
 
 
@@ -113,6 +114,9 @@ class Trash extends React.Component {
 
   render() {
     return (
+      <React.Fragment>
+      <Show />
+   
       <Context.Consumer>
         {ctx => {
           return (
@@ -183,6 +187,7 @@ class Trash extends React.Component {
           );
         }}
       </Context.Consumer>
+      </React.Fragment>
     );
   }
 }

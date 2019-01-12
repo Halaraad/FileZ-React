@@ -1,0 +1,59 @@
+
+body {
+  background-image: url("./Cvent-Event-Management-Hospitality.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mainSignIn {
+  margin: 5% 7%;
+  height: 515px;
+  width: 85%;
+  background-color: #f4f5fa;
+  display: flex;
+}
+.logoSignin {
+  background-image: url("./icon.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 266px;
+  width: 405px;
+  position: absolute;
+  margin-top: 45px;
+}
+.namelogo {
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 30px;
+  color: #0f65b2;
+  position: absolute;
+  width: 50px;
+  height: 30px;
+  margin-top: 275px;
+  margin-left: 110px;
+}
+.line {
+  margin-top: 320px;
+  margin-left: 110px;
+}
+.desclogo {
+  margin-top: 10px;
+  margin-left: 110px;
+  font-family: Roboto;
+  color: #0f65b2;
+  font-weight: bold;
+  position: absolute;
+}
+.info {
+  margin-top: 120px;
+  margin-left: 110px;
+}
+.msg {
+  margin-left: 10px;
+}
+.linev {
+  position: absolute;
+  margin-left: 310px;
+  margin-top: -325px;
+  height: 515px;
+  width: 2px;
+}
