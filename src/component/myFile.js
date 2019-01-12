@@ -401,7 +401,7 @@ class MyFiles extends React.Component {
                     const { getInputProps, getRef, inputValue } = props
                     return (
                       <TextInput
-                        placeholder="Search"
+                        placeholder="Search on FileZ"
                         value={inputValue}
                         innerRef={getRef}
                         marginLeft={60}
@@ -412,7 +412,7 @@ class MyFiles extends React.Component {
                 </Autocomplete>
                 <IconButton
                 id="seachUndo"
-                marginLeft={443}
+                marginLeft={403}
                 marginTop={-40}
                 onClick={()=>{
                   this.filterFiles('all')
@@ -671,7 +671,7 @@ class MyFiles extends React.Component {
                   />
                 </div>
 
-                <Table>
+                <Table id='table'>
                   <Table.Head>
                     <Table.TextCell
                       flexBasis={65}

@@ -3,12 +3,14 @@
   font-family: Roboto;
   z-index: 5;
   background-color: #ffff;
-  height: 50px;
+  height: 52px;
   width: 78%;
   position: absolute;
   margin-left: 250px;
   margin-top: 30px;
   display: flex;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 13px;
 }
 .divSearch {
   cursor: pointer;
