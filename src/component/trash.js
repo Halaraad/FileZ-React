@@ -7,7 +7,7 @@ import PDFIcon from '../assets/pdf.svg';
 import FileIcon from '../assets/file.svg';
 import videoIcon from '../assets/video-file.svg';
 import Show from "./show.js";
-import Login from "./login";
+import Login from "./signin";
 const cookies = new Cookies();
 class Trash extends React.Component {
   constructor(){

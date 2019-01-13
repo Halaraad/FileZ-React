@@ -9,7 +9,7 @@ import Storge from '../assets/database.svg';
 import FilesIcon from '../assets/report.svg';
 import UsersIcon from '../assets/team.svg';
 import Show from "./show.js";
-import Login from "./login";
+import Login from "./signin";
 const cookies = new Cookies();
 
 class Admin extends React.Component {

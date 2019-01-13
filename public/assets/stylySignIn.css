@@ -1,67 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900');
 .auth {
-  margin-left: 300px;
-  width: 100%;
+  width: 60%;
   height: 100%;
-  background-color: #f4f5fa;
+  background-color: #F4F5FA;
   color: rgba(51, 51, 51, 0.75);
+  font-family: 'Roboto', sans-serif;
+  border-left: 1px solid #e5e5e5;
+  text-align: left;
 }
 .Authenticate {
   font-family: Roboto;
-  font-style: normal;
   font-weight: bold;
-  line-height: normal;
   font-size: 24px;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 8%;
 }
 .username input,
 .email input,
 .password input {
-  width: 50%;
-  height: 30px;
-
-  box-shadow: 5px 5px 20px #b3adad;
+  width: 70%;
+  height: 50px;
+  box-shadow: 0px 0px 20px #E5E5E5;
   font-size: 1.1rem;
   padding-left: 15px;
   color: rgba(51, 51, 51, 0.75);
   border-radius: 5px;
   border: 0px;
+  font-weight: bold;
+  font-size: 16px;
+  text-indent: 15px;
 }
-.username {
-  margin-left: 26%;
-  margin-top: 50px;
+.username input::placeholder,
+.email input::placeholder,
+.password input::placeholder {
+  font-weight: bold;
+  font-size: 16px;
+  text-indent: 15px;
 }
 .email {
-  margin-left: 26%;
-  margin-top: 40px;
+  margin-top: 5%;
 }
 .password {
-  margin-left: 26%;
-  margin-top: 40px;
+  margin-top: 5%;
 }
 .username i,
 .email i,
 .password i {
   margin-right: 20px;
 }
-
+form {
+  text-align: center;
+  margin-top: 8%;
+}
 .btnauth {
-  width: 100px;
-  height: 30px;
-  margin-left: 42%;
+  width: 160px;
+  height: 55px;
   margin-top: 40px;
   border-radius: 5px;
   border: 0px;
-  box-shadow: 5px 5px 20px #b3adad;
+  box-shadow: 0px 0px 10px #C4C4C4;
   background-color: #0f65b2;
-  color: #ffff;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-family: Roboto;
+  font-weight: bold;
+  color: #EEEEEE;
 }
 .linkSignUp {
-  margin-left: 34%;
-  margin-top: 130px;
+  text-align: center;
+  margin-top: 13%;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  color: #666666
 }
 .linkSignUp span {
   width: 300px;
   height: 30px;
+}
+.on-signup {
+  margin-top: 4%;
+}
+.icons {
+  vertical-align: middle;
 }

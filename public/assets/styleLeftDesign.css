@@ -1,59 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900');
 
 body {
-  background-image: url("./Cvent-Event-Management-Hospitality.png");
+  /* background-image: url("./Cvent-Event-Management-Hospitality.png"); */
   background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(270deg, #30D2BE 0%, #0F65B2 51.93%, #473B7B 100%);
+  font-family: 'Roboto', sans-serif;
 }
 .mainSignIn {
-  margin: 5% 7%;
-  height: 515px;
-  width: 85%;
-  background-color: #f4f5fa;
+  margin: 6% 15%;
+  height: 70%;
+  width: 70%;
+  background-color: #F4F5FA;
   display: flex;
+  border-radius: 5px;
+}
+.leftside{
+  width: 30%;
+  height: 88.2%;
+  display: flex;
+  flex-direction: column;
+  padding: 5% 8% 0 8%;
+  box-sizing: unset;
 }
 .logoSignin {
-  background-image: url("./icon.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 266px;
-  width: 405px;
-  position: absolute;
-  margin-top: 45px;
+  width: 100%;
+  height: auto;
+  align-self: center;
 }
 .namelogo {
   font-family: Roboto;
   font-weight: bold;
   font-size: 30px;
   color: #0f65b2;
-  position: absolute;
-  width: 50px;
+  width: 70px;
   height: 30px;
-  margin-top: 275px;
-  margin-left: 110px;
+  margin-bottom: 10px;
 }
 .line {
-  margin-top: 320px;
-  margin-left: 110px;
+  width: 30px;
+  height: auto;
 }
 .desclogo {
-  margin-top: 10px;
-  margin-left: 110px;
+  margin-top: 20px;
   font-family: Roboto;
-  color: #0f65b2;
+  color: #666666;
   font-weight: bold;
-  position: absolute;
 }
 .info {
-  margin-top: 120px;
-  margin-left: 110px;
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
 }
 .msg {
-  margin-left: 10px;
+  width: 30px;
+  height: auto;
 }
-.linev {
-  position: absolute;
-  margin-left: 310px;
-  margin-top: -325px;
-  height: 515px;
-  width: 2px;
+.icons-container {
+  border-top: 1px solid #E5E5E5; 
+  margin-top: 20%;
+  padding-top: 5%;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .leftside {
+    display: none;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) {
+  .leftside {
+    display: none;
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  .leftside {
+    display: block;
+  }
+    
 }

@@ -1,24 +1,13 @@
 import React, { Component } from "react";
 import Context from "./component/context.js";
-import { toaster } from "evergreen-ui";
-import Show from "./component/show.js";
 import Trash from "./component/trash";
 import Admin from "./component/admin";
 import MyFiles from "./component/myFile";
 import signin from "./component/signin";
 import signup from "./component/signup";
-import login from "./component/login";
 import Home from "./component/home";
 import { BrowserRouter, Route } from "react-router-dom";
 import Cookies from "universal-cookie";
-import axios from "axios";
-import Openfolder from "./assets/openfolder.svg";
-import FolderIcon from "./assets/folder.svg";
-var FolderIdCheck;
-var FileUpload;
-var SelectFolderOnUpload;
-var FolderName;
-var iconbuffer;
 const cookies = new Cookies();
 class App extends Component {
   constructor() {
@@ -92,7 +81,6 @@ class App extends Component {
           <Route exact path="/files" component={MyFiles} />
           <Route exact path="/Trash" component={Trash} />
           <Route exact path="/admin"  component={Admin} />
-          <Route exact path="/Login"  component={login} />
           <Route exact path="/signup"  component={signup} />
           <Route exact path="/signin"  component={signin} />
           

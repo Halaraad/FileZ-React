@@ -7,11 +7,14 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
-.main {
+.Homemain {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background: #FFFFFF
+    background: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 .headerHome {
     width: 100%;

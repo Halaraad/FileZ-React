@@ -1,7 +1,6 @@
 import React from "react";
 import Context from "./context.js";
 import {
-  Avatar,
   Pane,
   Dialog,
   Button,
@@ -17,7 +16,6 @@ import {
   toaster,
   Autocomplete,
   TextInput,
-  SearchInput
 } from "evergreen-ui";
 import Component from "@reactions/component";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -31,9 +29,9 @@ import Cookies from "universal-cookie";
 import Openfolder from "../assets/openfolder.png";
 import Show from "./show.js";
 import axios from "axios";
-import ReactAutocomplete from "react-autocomplete";
 import UserIcon from '../assets/user.svg';
-import Login from "./login";
+import Login from "./signin";
+
 
 const cookies = new Cookies();
 var FolderIdCheck;

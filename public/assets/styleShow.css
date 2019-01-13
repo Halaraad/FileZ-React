@@ -131,3 +131,6 @@ a:active {
   margin-top: 56px
 }
 
+.NavLink-auth.active{
+  border-bottom: solid 6px white;
+}

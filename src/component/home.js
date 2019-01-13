@@ -9,7 +9,8 @@ class Home extends Component {
 
     render() {
         return (
-            <div class="main">
+            <div class="allpage">
+            <div class="Homemain">
                 <div class="headerHome">
                     <h1 class="header-h1">FileZ</h1>
                 </div>
@@ -49,15 +50,16 @@ class Home extends Component {
                 <div class="buttons-img-container">
                     <img class="buttons-img" src={require("../assets/home.png")} width="300" />
                     <div class="buttons">
-                        <a class="buttons-btn" href="#">Sign Up</a>
+                        <a class="buttons-btn" href="/signup">Sign Up</a>
                         <span class="buttons-span">or</span>
-                        <a class="buttons-btn" href="#">Sign In</a>
+                        <a class="buttons-btn" href="/signin">Sign In</a>
                     </div>
                 </div>
                 <div class="footer">
                     <a href="#"><img class="footer-img" src={require("../assets/facebook.png")} /></a>
                     <a href="#"><img class="footer-img2" src={require("../assets/email.png")} /></a>
                 </div>
+            </div>
             </div>
         )
     }
