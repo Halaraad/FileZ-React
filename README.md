@@ -1,8 +1,10 @@
 # FileZ-Client
+
+### first 
 ```
 npm i 
 ```
-then 
+### then
 ```
 npm start
 ```
