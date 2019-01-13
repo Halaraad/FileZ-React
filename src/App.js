@@ -8,6 +8,7 @@ import MyFiles from "./component/myFile";
 import signin from "./component/signin";
 import signup from "./component/signup";
 import login from "./component/login";
+import Home from "./component/home";
 import { BrowserRouter, Route } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from "axios";
@@ -87,12 +88,14 @@ class App extends Component {
       <BrowserRouter>
         <Context.Provider value={{ value: this.state, actions: {} }}>
           {/* <Show /> */}
+          <Route exact path="/" component={Home} />
           <Route exact path="/files" component={MyFiles} />
           <Route exact path="/Trash" component={Trash} />
           <Route exact path="/admin"  component={Admin} />
           <Route exact path="/Login"  component={login} />
           <Route exact path="/signup"  component={signup} />
           <Route exact path="/signin"  component={signin} />
+          
         </Context.Provider>
       </BrowserRouter>
     );
