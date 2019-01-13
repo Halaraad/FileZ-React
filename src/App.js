@@ -24,6 +24,7 @@ class App extends Component {
     super();
     this.state = {
       Session: [],
+      isLogin:'',
       FolderIdCheck: "",
       Packagefree: "",
       packageSize: ""
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/files/`, {
+    fetch(`/api/user/checklogin/`, {
       credentials: "same-origin",
       headers: {
         token: cookies.get("token")
@@ -43,13 +44,14 @@ class App extends Component {
         }
       })
       .then(data => {
-        if (data) {
+
+        if (data[1]) {
           //calculate limit for
           let packageSize;
-          var limit = data[1].session.limit;
-          if (data[1].session.package == "free") {
+          var limit = data[1].sesson.limit;
+          if (data[1].sesson.package == "free") {
             packageSize = 100000000;
-          } else if (data[1].session.package == "economic") {
+          } else if (data[1].sesson.package == "economic") {
             packageSize = 1000000000;
           } else if (data[1].session.package == "standard") {
             packageSize = 10000000000;
@@ -62,13 +64,19 @@ class App extends Component {
           var packagefree = rate * 100;
 
           this.setState({
-            Session: data[1].session,
+            isLogin: data[0].auth,
+            Session: data[1].sesson,
             Packagefree: packagefree,
             PackageSize: packageSize
           });
-        }
 
-        console.log(this.state.Session);
+        }else{
+          this.setState({
+            isLogin: data.auth,
+          });
+       
+        }
+    console.log(this.state.isLogin)
       });
   }
 
