@@ -44,39 +44,41 @@ class App extends Component {
         }
       })
       .then(data => {
-
-        if (data[1]) {
-          //calculate limit for
-          let packageSize;
-          var limit = data[1].sesson.limit;
-          if (data[1].sesson.package == "free") {
-            packageSize = 100000000;
-          } else if (data[1].sesson.package == "economic") {
-            packageSize = 1000000000;
-          } else if (data[1].session.package == "standard") {
-            packageSize = 10000000000;
-          } else if (data[1].session.package == "business") {
-            packageSize = 100000000000;
+        if (data) {
+          if (data[1]) {
+            //calculate limit for
+            let packageSize;
+            var limit = data[1].sesson.limit;
+            if (data[1].sesson.package == "free") {
+              packageSize = 100000000;
+            } else if (data[1].sesson.package == "economic") {
+              packageSize = 1000000000;
+            } else if (data[1].session.package == "standard") {
+              packageSize = 10000000000;
+            } else if (data[1].session.package == "business") {
+              packageSize = 100000000000;
+            }
+  
+            var free = packageSize - limit;
+            var rate = free / packageSize;
+            var packagefree = rate * 100;
+  
+            this.setState({
+              isLogin: data[0].auth,
+              Session: data[1].sesson,
+              Packagefree: packagefree,
+              PackageSize: packageSize
+            });
+  
+          }else{
+            this.setState({
+              isLogin: data.auth,
+            });
+         
           }
-
-          var free = packageSize - limit;
-          var rate = free / packageSize;
-          var packagefree = rate * 100;
-
-          this.setState({
-            isLogin: data[0].auth,
-            Session: data[1].sesson,
-            Packagefree: packagefree,
-            PackageSize: packageSize
-          });
-
-        }else{
-          this.setState({
-            isLogin: data.auth,
-          });
+      console.log(this.state.isLogin) 
+        } 
        
-        }
-    console.log(this.state.isLogin)
       });
   }
 

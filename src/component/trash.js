@@ -1,6 +1,6 @@
 import React from "react";
 import Context from "./context.js";
-import { Avatar, Table, IconButton,  toaster } from "evergreen-ui";
+import { Avatar, Table, IconButton,  toaster,Spinner,Pane } from "evergreen-ui";
 import Cookies from 'universal-cookie';
 import axios from  'axios';
 import PDFIcon from '../assets/pdf.svg';
@@ -113,14 +113,13 @@ class Trash extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <Show />
-   
       <Context.Consumer>
         {ctx => {
-          if (ctx.value.isLogin) {
+          if (ctx.value.isLogin=='login') {
             return (
             
               <React.Fragment>
+                      <Show />
                 <div className="trashcontiner">
                   <Table>
                     <Table.Head>
@@ -185,13 +184,16 @@ class Trash extends React.Component {
                 </div>
               </React.Fragment>
             );
-          } else {
+          } else if (ctx.value.isLogin=='notLogin') {
+            return ( 
+            <Login/> 
+               )
+          } else{
             return (
-
-              <Login/>
-    
-                )
-            
+              <Pane id="DivSpinner" display="flex" alignItems="center" justifyContent="center"  >
+                <Spinner size={100} />
+              </Pane>
+               )
           }
 
         }}

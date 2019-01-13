@@ -356,7 +356,7 @@ class MyFiles extends React.Component {
       <Context.Consumer>
     
         {ctx => {
-          if (ctx.value.isLogin) {
+          if (ctx.value.isLogin=='login') {
             return (
               <React.Fragment>
                      <Show /> 
@@ -827,12 +827,16 @@ class MyFiles extends React.Component {
                 </div>
               </React.Fragment>
             );
-          } else {
+          } else if (ctx.value.isLogin=='notLogin') {
             return (
-
-          <Login/>
-
-            )
+              <Login/> 
+              )
+          } else{
+            return (
+              <Pane id="DivSpinner" display="flex" alignItems="center" justifyContent="center" >
+                 <Spinner size={100} />
+              </Pane>
+               )
           }
          
         }}

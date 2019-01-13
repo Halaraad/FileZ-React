@@ -1,6 +1,6 @@
 import React from "react";
 import Context from "./context.js";
-import { Table, IconButton, Dialog ,Badge,Pane,Heading,toaster} from "evergreen-ui";
+import { Table, IconButton, Dialog ,Badge,Pane,Heading,toaster,Spinner} from "evergreen-ui";
 import usericon from '../assets/user.svg';
 import Cookies from 'universal-cookie';
 import Component from "@reactions/component";
@@ -110,12 +110,13 @@ class Admin extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Show />
       <Context.Consumer>
         {ctx => {
-          if (ctx.value.isLogin&&ctx.value.Session.role==1) {
+          if (ctx.value.isLogin=="login"&&ctx.value.Session.role==1) {
             return (
+              
               <React.Fragment>
+                     <Show />
                 <div className="admincard">
                   <div className="admincard1">Total Data Size : {(this.state.FilesSizeInfo/1000000).toFixed(2)} MB
                   <img id="TotalIcons"   src={Storge} alt="Paris"/></div>
@@ -214,12 +215,16 @@ class Admin extends React.Component {
                 </div>
               </React.Fragment>
             );
-          }else {
+          } else if (ctx.value.isLogin=='notLogin') {
+            return ( 
+            <Login/> 
+               )
+          } else{
             return (
-
-              <Login/>
-    
-                )
+              <Pane id="DivSpinner" display="flex" alignItems="center" justifyContent="center"  >
+                  <Spinner size={100} />
+              </Pane>
+               )
           }
          
         }}
