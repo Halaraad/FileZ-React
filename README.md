@@ -25,3 +25,5 @@ $ npm i
 $ npm start 
 ```
 [Live Demo](https://file-z.herokuapp.com/)
+
+### Server [Repo](https://github.com/rasheed92/FileZ-Server)
