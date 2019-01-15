@@ -24,4 +24,4 @@ $ npm i
 ```
 $ npm start 
 ```
-Link:[Live Demo](https://file-z.herokuapp.com/)
+[Live Demo](https://file-z.herokuapp.com/)
