@@ -168,10 +168,14 @@ html,body {
   font-family: 'Roboto', sans-serif;
   background-repeat: no-repeat;
   background-position: center;
-  background: linear-gradient(270deg, #30D2BE 0%, #0F65B2 51.93%, #473B7B 100%);
+  /* background: linear-gradient(270deg, #30D2BE 0%, #0F65B2 51.93%, #473B7B 100%); */
   width: auto;
   height: auto;
+
+  background-image: linear-gradient(234deg, rgba(48, 210, 190, 0.4), rgba(53, 132, 167, 0.7), rgba(71, 59, 123, 1)), url('/assets/images/home.png');
+  text-decoration: none;
 }
+
 #root{
   width: 100%;
   height: 100%;

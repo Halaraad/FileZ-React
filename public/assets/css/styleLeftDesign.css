@@ -19,7 +19,7 @@ body {
 .mainSignIn {
 
   /* margin: 10% 15%; */
-  height: 70%;
+  height: 75%;
   width: 70%;
   background-color: #F4F5FA;
   display: flex;
@@ -70,7 +70,7 @@ body {
   height: auto;
 }
 .icons-container {
-  border-top: 1px solid #E5E5E5; 
+  border-top: 1px solid transparent; 
   margin-top: 20%;
   padding-top: 5%;
 }

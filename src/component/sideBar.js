@@ -128,7 +128,7 @@ class SideBar extends React.Component {
     super();
     this.state = {
       percent: 0,
-      Folders: ""
+      Folders: []
     };
   }
 
@@ -210,6 +210,7 @@ class SideBar extends React.Component {
       // style={{ marginBottom: "15px" }}
 >
                   <Heading size={400}  marginLeft={32}  marginBottom={10} >Select Folder</Heading>
+                 
                   <Select
                   name='folder'
                    width="90%" 
@@ -225,6 +226,7 @@ class SideBar extends React.Component {
                       <input type='hidden' name="token" value={cookies.get('token')}  />
                       <input type='hidden' name="public" value={1}  />
                       <Heading size={400} marginLeft={32}    width="90%" marginBottom={10} marginTop="default">Choose File</Heading>
+      
           <FilePicker
             marginLeft={32}  
             width="90%" marginBottom={10} 

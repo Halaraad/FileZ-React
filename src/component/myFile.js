@@ -424,7 +424,7 @@ class MyFiles extends React.Component {
                             hasHeader={false}
                           >
                             <ModelPlan>
-                              <form>
+                              <form className="plan-form">
                                 <ModelCard1>
                                   <p className="cardname">Free</p>
                                   <label className="container">
@@ -799,7 +799,7 @@ class MyFiles extends React.Component {
                                     onCloseComplete={() =>
                                       setState({ isShown: false })
                                     }
-                                    confirmLabel="Custom Label"
+                                    confirmLabel="Move"
                                   >
                                     <Heading
                                       size={400}
