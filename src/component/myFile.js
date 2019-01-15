@@ -491,7 +491,7 @@ class MyFiles extends React.Component {
                     <div class="dropdown">
                       <span>
                       <img id="profileImg" 
-                      // src={UserIcon} 
+                      src={UserIcon} 
                        style={ctx.value.Session.porfileImg == "defaultUser.png" ||
                        ctx.value.Session.porfileImg == ""  ? {  } : {display: "none"} }/>
                         <img id="profileImg"
