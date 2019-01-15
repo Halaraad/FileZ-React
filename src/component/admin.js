@@ -1,14 +1,16 @@
 import React from "react";
 import Context from "./context.js";
 import { Table, IconButton, Dialog ,Badge,Pane,Heading,toaster,Spinner} from "evergreen-ui";
-import usericon from '../assets/user.svg';
+import usericon from '../assets/images/user.svg';
 import Cookies from 'universal-cookie';
 import Component from "@reactions/component";
 import axios from "axios";
-import Storge from '../assets/database.svg';
-import FilesIcon from '../assets/report.svg';
-import UsersIcon from '../assets/team.svg';
-import Show from "./show.js";
+import Storge from '../assets/images/database.svg';
+import FilesIcon from '../assets/images/report.svg';
+import UsersIcon from '../assets/images/team.svg';
+import Loading from '../assets/images/loading.gif';
+import { Row ,Col } from 'react-bootstrap';
+import SideBar from "./sideBar";
 import Login from "./signin";
 const cookies = new Cookies();
 
@@ -116,20 +118,33 @@ class Admin extends React.Component {
             return (
               
               <React.Fragment>
-                     <Show />
-                <div className="admincard">
-                  <div className="admincard1">Total Data Size : {(this.state.FilesSizeInfo/1000000).toFixed(2)} MB
-                  <img id="TotalIcons"   src={Storge} alt="Paris"/></div>
-                  
-                  <div className="admincard1">Number of Files : {this.state.FilesNumber}
-                  <img id="TotalIcons"   src={FilesIcon} alt="Paris"/>
-                  </div>
-                  <div className="admincard1">Total Users : {this.state.NumberOfUsers}
-                  <img id="TotalIcons"   src={UsersIcon} alt="Paris"/>
-                  
-                  </div>
-                </div>
-                <div className="admincontiner">
+                     <SideBar />
+
+                     <Row className="show-grid" style={{marginRight: 0 + 'px'}}>
+    <Col xs={12} sm={6}  md={8} xsOffset={0} smOffset={4}  mdOffset={3}>
+    <div className="admincard">
+
+<div className="admincard1">Total Data Size : {(this.state.FilesSizeInfo/1000000).toFixed(2)} MB
+<img id="TotalIcons"   src={Storge} alt="Paris"/></div>
+
+<div className="admincard1">Number of Files : {this.state.FilesNumber}
+<img id="TotalIcons"   src={FilesIcon} alt="Paris"/>
+</div>
+<div className="admincard1">Total Users : {this.state.NumberOfUsers}
+<img id="TotalIcons"   src={UsersIcon} alt="Paris"/>
+
+</div>
+</div>
+
+
+
+    </Col>
+  </Row>
+
+  
+  <Row className="show-grid" style={{marginRight: 0 + 'px'}}>
+    <Col xs={12} sm={6}  md={8} xsOffset={0} smOffset={4}  mdOffset={3}>
+    <div className="admincontiner">
                   <Table className="tablebody">
                     <Table.Head>
                       <Table.TextCell
@@ -138,6 +153,7 @@ class Admin extends React.Component {
                         flexGrow={0}
                       />
                       <Table.TextHeaderCell>Name</Table.TextHeaderCell>
+                      <Table.TextHeaderCell>User Type</Table.TextHeaderCell>
                       <Table.TextHeaderCell>join At</Table.TextHeaderCell>
                       <Table.TextHeaderCell>Remaining Storage</Table.TextHeaderCell>
                       <Table.TextHeaderCell>Package</Table.TextHeaderCell>
@@ -159,14 +175,18 @@ class Admin extends React.Component {
                           >
    
                         
-                         <img id="img"   src={`http://localhost:5000/`+ user.porfileImg} alt="Paris" style={user.porfileImg != 'defaultUser.png' ? { } : {display: 'none' }}/>
+                         <img id="img"   src={`http://localhost:5000/`+ user.porfileImg} alt="img" style={user.porfileImg != 'defaultUser.png' ? { } : {display: 'none' }}/>
                           
-                          <img id="img"   src={usericon} alt="Paris" style={user.porfileImg == 'defaultUser.png' ? { } : {display: 'none' }}/>
+                          <img id="img"   src={usericon} alt="img" style={user.porfileImg == 'defaultUser.png' ? { } : {display: 'none' }}/>
                           </Table.TextCell>
                           <Table.TextCell>{user.name}
-              
-                          <Badge style={user.role == 1 ? { } : {display: 'none' }} color="red" isSolid marginLeft={53}>Admin</Badge>
-                          <Badge style={user.role == 0 ? { } : {display: 'none' }} color="blue" isSolid marginLeft={53}>Normal</Badge>
+                          </Table.TextCell>
+                          <Table.TextCell>
+                      
+                        
+                          <Badge style={user.role == 1 ? { } : {display: 'none' }} color="red" isSolid>Admin</Badge>
+                          <Badge style={user.role == 0 ? { } : {display: 'none' }} color="blue" isSolid >Normal</Badge>
+
                           </Table.TextCell>
                           <Table.TextCell>{user.uptime}</Table.TextCell>
                           <Table.TextCell>{(user.limit/1000000).toFixed(3)} MB</Table.TextCell>
@@ -213,6 +233,12 @@ class Admin extends React.Component {
                     </Table.Body>
                   </Table>
                 </div>
+           
+    </Col>
+  </Row>
+               
+
+       
               </React.Fragment>
             );
           } else if (ctx.value.isLogin=='notLogin') {
@@ -222,7 +248,7 @@ class Admin extends React.Component {
           } else{
             return (
               <Pane id="DivSpinner" display="flex" alignItems="center" justifyContent="center"  >
-                  <Spinner size={100} />
+                 <img src={Loading}/>
               </Pane>
                )
           }

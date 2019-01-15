@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 import Context from "./component/context.js";
 import Trash from "./component/trash";
 import Admin from "./component/admin";
 import MyFiles from "./component/myFile";
-import signin from "./component/signin";
-import signup from "./component/signup";
+import Signin from "./component/signin";
+import Signup from "./component/signup";
+import SideBar from "./component/sideBar";
 import Home from "./component/home";
-import { BrowserRouter, Route } from "react-router-dom";
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
+
 class App extends Component {
   constructor() {
     super();
@@ -66,9 +69,8 @@ class App extends Component {
             });
          
           }
-      console.log(this.state.isLogin) 
+          // console.log(this.state.isLogin) 
         } 
-       
       });
   }
 
@@ -79,14 +81,14 @@ class App extends Component {
           {/* <Show /> */}
           <Route exact path="/" component={Home} />
           <Route exact path="/files" component={MyFiles} />
-          <Route exact path="/Trash" component={Trash} />
+          <Route exact path="/trash" component={Trash} />
           <Route exact path="/admin"  component={Admin} />
-          <Route exact path="/signup"  component={signup} />
-          <Route exact path="/signin"  component={signin} />
-          
+          <Route exact path="/signup"  component={Signup} />
+          <Route exact path="/signin"  component={Signin} />
         </Context.Provider>
       </BrowserRouter>
     );
   }
 }
+
 export default App;

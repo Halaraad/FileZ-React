@@ -1,10 +1,10 @@
 import React from "react";
-import Context from "./context.js";
 import { NavLink } from "react-router-dom";
 import { toaster } from 'evergreen-ui';
-
 import axios from  'axios';
 import Cookies from 'universal-cookie';
+import Context from "./context.js";
+
 const cookies = new Cookies();
 
 class SignIn extends React.Component {
@@ -17,17 +17,10 @@ class SignIn extends React.Component {
     }
   }
 
-
-  onChangeEmail(value){
+  handleChange(event) {
     this.setState({
-      Email: value
-    })
-  }
-  onChangePassword(value){
-    this.setState({
-      Password: value
-    })
-    
+        [event.target.name]: event.target.value
+      })
   }
 
   Login() {
@@ -37,27 +30,17 @@ class SignIn extends React.Component {
         password: this.state.Password
       })
       .then(function (response) {
-
-
-
         cookies.set('token', response.data, {
           path: '/',
           expires: new Date(Date.now() + 604800000)
         });
-
         window.location.href = '/files'
       })
       .catch(function (error) {
         if (error.response) {
-
-          toaster.danger(
-            'please check your email address and password and try again '
-          )
-
-
+          toaster.danger('Please check your email and password then try again')
         }
       });
-
   }
 
   render() {
@@ -65,57 +48,51 @@ class SignIn extends React.Component {
     <Context.Consumer>
       {ctx => {
         return (
-          <NavLink activeClassName="NavLink-auth"  exact to="/signin">
-            <React.Fragment>
+          <div className="authmain">
+          <NavLink activeClassName="NavLink-auth" exact to ="/signin">
+          <div className="authDiv">
+            <React.Fragment >
               <div className="mainSignIn">
                 <div className="leftside">
-                  <div className="logoSignin"><img width="350" src={require("../assets/home.png")} /></div>
+                <div className="logoSignin"><img width="350" src="/assets/images/home.png" /></div>
                   <div className="namelogo">Filez</div>
                   <img
                     className="line"
-                    src={require("../assets/line.png")}
+                    src="/assets/images/line.png"
                     alt=""
                   />
                   <div className="desclogo">Keep your files online.</div>
                   <div className="icons-container">
-                    <img
+                    {/* <img
                       className="info"
-                      src={require("../assets/info.png")}
-                      alt=""
+                      src="/assets/images/facebook.png"
+                      alt="facebook"
                     />
                     <img
                       className="msg"
-                      src={require("../assets/msg.png")}
-                      alt=""
-                    />
+                      src="/assets/images/email.png"
+                      alt="email"
+                    /> */}
                   </div>
-                  {/* <img
-                    className="linev"
-                    src={require("../assets/Linev.png")}
-                    alt=""
-                  /> */}
                 </div>
                 <div className="auth">
                   <div className="Authenticate">Authenticate</div>
 
-                  <form>
-                    <div className="username">
-                      <i class="material-icons icons">mail</i>
-                      <input type="email" placeholder="Email" 
-                        onChange={(event)=>{
-                        this.onChangeEmail(event.target.value)
-                      }}/>
+                  <form className="authform"> 
+                    <div className="email">
+                      <input type="email" placeholder="Email" name="Email"
+                        onChange={this.handleChange.bind(this)}
+                        value={this.state.Email}
+                        />
                     </div>
                     <div className="password">
-                      <i class="material-icons icons">lock</i>
-                      <input type="password" placeholder="Password" 
-                        onChange={(event)=>{
-                        this.onChangePassword(event.target.value)
-                      }}/>
+                      <input type="password" placeholder="Password" name="Password"
+                        onChange={this.handleChange.bind(this)}
+                        value={this.state.Password}
+                        />
                     </div>
                     <button className="btnauth"
                     onClick={this.Login.bind(this)}
-                    
                     >Authenticate</button>
                   </form>
 
@@ -128,7 +105,9 @@ class SignIn extends React.Component {
                 </div>
               </div>
             </React.Fragment>
+            </div>
           </NavLink>
+          </div>
         );
       }}
     </Context.Consumer>

@@ -20,19 +20,20 @@ import {
 import Component from "@reactions/component";
 import "react-alice-carousel/lib/alice-carousel.css";
 import styled from "styled-components";
-import PDFIcon from '../assets/images/pdf.svg';
-import FileIcon from '../assets/images/file3.svg';
-import videoIcon from '../assets/images/video.svg';
-import FolderIcon from '../assets/images/folder.png';
+import PDFIcon from "../assets/pdf.svg";
+import FileIcon from "../assets/file.svg";
+import videoIcon from "../assets/video-file.svg";
+import FolderIcon from "../assets/folder (2).png";
 import ItemsCarousel from "react-items-carousel";
 import Cookies from "universal-cookie";
-import Openfolder from '../assets/images/openfolder.png';
-import SideBar from "./sideBar";
+import Openfolder from "../assets/openfolder.png";
+import Show from "./sideBar.js";
 import axios from "axios";
-import UserIcon from '../assets/images/user.svg';
+import UserIcon from '../assets/user.svg';
 import Login from "./signin";
-import Loading from '../assets/images/loading.gif';
-import { Row ,Col } from 'react-bootstrap';
+import l from '../assets/d.gif';
+import { Grid, Row,Col} from 'react-bootstrap';
+
 const cookies = new Cookies();
 var FolderIdCheck;
 var iconbuffer;
@@ -43,16 +44,15 @@ let ModelPlan = styled.div`
   color: #7e87a1;
   font-family: Roboto;
   background-color: white;
-  height: 210px;
+  height: 400px;
   width: 530px;
 `;
 let ModelCard1 = styled.div`
   background-color: #f4f5fa;
-  height: 85px;
-  padding-top: 5px;
+  height: 160px;
   width: 200px;
   margin-left: 30px;
- 
+  margin-top: 15px;
   box-shadow: 2px 2px 10px #b3adad;
   position: absolute;
   border: 0px;
@@ -60,25 +60,21 @@ let ModelCard1 = styled.div`
 `;
 let ModelCard2 = styled.div`
   background-color: #f4f5fa;
-  height: 85px;
-  padding-top: 5px;
+  height: 160px;
   width: 200px;
   margin-left: 290px;
-  ${'' /* margin-top: 15px; */}
+  margin-top: 15px;
   box-shadow: 2px 2px 10px #b3adad;
   position: absolute;
   border: 0px;
   border-radius: 10px;
-
-
 `;
 let ModelCard3 = styled.div`
   background-color: #f4f5fa;
-  height: 85px;
-  padding-top: 5px;
+  height: 160px;
   width: 200px;
   margin-left: 30px;
-  margin-top: 100px;
+  margin-top: 230px;
   box-shadow: 2px 2px 10px #b3adad;
   position: absolute;
   border: 0px;
@@ -86,27 +82,25 @@ let ModelCard3 = styled.div`
 `;
 let ModelCard4 = styled.div`
   background-color: #f4f5fa;
-  height: 85px;
-  padding-top: 5px;
+  height: 160px;
   width: 200px;
   margin-left: 290px;
-  margin-top: 100px;
+  margin-top: 230px;
   box-shadow: 2px 2px 10px #b3adad;
   position: absolute;
   border: 0px;
   border-radius: 10px;
 `;
 let ViewContent = styled.div`
-color: #7e87a1;
-font-family: Roboto;
-background-color: #fefeff;
-height: 120px;
-width: 96%;
-position: absolute;
-margin-top: 190px;
-padding: 8px 0;
-box-shadow: 0px 5px 10px rgba(171,171,171,0.35);
-border-radius: 5px;
+  color: #7e87a1;
+  font-family: Roboto;
+  z-index: 9;
+  background-color: #f4f5fa;
+  height: 130px;
+  width: 78%;
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 156px;
 `;
 
 class MyFiles extends React.Component {
@@ -363,21 +357,15 @@ class MyFiles extends React.Component {
         {ctx => {
           if (ctx.value.isLogin=='login') {
             return (
-              <div >
-                     <SideBar /> 
-
-                <Row className="show-grid" style={{marginRight: 0 + 'px'}}>
-    <Col  xs={12} sm={6}  md={8} xsOffset={0} smOffset={4}  mdOffset={3}>
-
-    <header className="header">
+              <React.Fragment>
+                     <Show /> 
+                <header className="header">
                   <div className="divSearch">
-                  <div>
                     <img
                       className="imgSearch"
-                      src="/assets/images/search.png"
+                      src={require("../assets/search.png")}
                       alt=""
                     />
-                    </div>
   
                     {/* <input type="text" placeholder="Search on FileZ" /> */}
                     <Autocomplete
@@ -394,25 +382,22 @@ class MyFiles extends React.Component {
                           placeholder="Search on FileZ"
                           value={inputValue}
                           innerRef={getRef}
-                          height={100}
-                          
-                          appearance= 'default'
+                          marginLeft={60}
                           {...getInputProps()}
                         />
                       )
                     }}
                   </Autocomplete>
-
-                  <div className="seachUndo">
-                <IconButton
-                  
+                  <IconButton
+                  id="seachUndo"
+                  marginLeft={437}
+                  marginTop={-40}
                   onClick={()=>{
                     this.filterFiles('all')
+                    
                   }}icon="cross"
                    intent="info" />
                   </div>
-                  </div>
-                  <div className="chooseplaneMain">
                   <div className="chooseplane" id="chooseplane">
                     <Component initialState={{ isShown: false }}>
                       {({ state, setState }) => (
@@ -432,7 +417,7 @@ class MyFiles extends React.Component {
                                     <Radio
                                       checked
                                       name="group"
-                                      // label="Radio default"
+                                      label="Radio default"
                                     />
                                   </label>
                                 </ModelCard1>
@@ -443,7 +428,7 @@ class MyFiles extends React.Component {
                                     <Radio
                                       checked
                                       name="group"
-                                      // label="Radio default"
+                                      label="Radio default"
                                     />
                                   </label>
                                 </ModelCard2>
@@ -454,7 +439,7 @@ class MyFiles extends React.Component {
                                     <Radio
                                       checked
                                       name="group"
-                                      // label="Radio default"
+                                      label="Radio default"
                                     />
                                   </label>
                                 </ModelCard3>
@@ -465,7 +450,7 @@ class MyFiles extends React.Component {
                                     <Radio
                                       checked
                                       name="group"
-                                      // label="Radio default"
+                                      label="Radio default"
                                     />
                                   </label>
                                 </ModelCard4>
@@ -490,8 +475,7 @@ class MyFiles extends React.Component {
                   <div className="userimg">
                     <div class="dropdown">
                       <span>
-                      <img id="profileImg" 
-                      // src={UserIcon} 
+                      <img id="profileImg" src={UserIcon} 
                        style={ctx.value.Session.porfileImg == "defaultUser.png" ||
                        ctx.value.Session.porfileImg == ""  ? {  } : {display: "none"} }/>
                         <img id="profileImg"
@@ -499,11 +483,10 @@ class MyFiles extends React.Component {
                        ctx.value.Session.porfileImg == ""  ? { display: "none" } : {} } src={`http://localhost:5000/`+ ctx.value.Session.porfileImg}/>
                       </span>
                       <div class="dropdown-content">
-                      {/* <span>{ctx.value.Session.name}</span> */}
-                        <span className="session-email">{ctx.value.Session.email}</span>
+                        <span>{ctx.value.Session.email}</span>
                         <span>
                           <Button
-                            marginLeft={71}
+                            marginRight={10}
                             appearance="primary"
                             intent="danger"
                             onClick={()=>{
@@ -517,76 +500,58 @@ class MyFiles extends React.Component {
                         </span>
                       </div>
                     </div>
-                    </div>
-                  
                   </div>
                 </header>
-              
-
-    </Col>
-  </Row>
-  <Row className="show-grid" style={{marginRight: 0 + 'px'}}>
-  <Col  xs={12} sm={6}  md={8} xsOffset={0} smOffset={4}  mdOffset={3}>
-
-  <ViewContent>
-
-<div className="foldersName">Folders</div>
-<div>
-  <ItemsCarousel
-    id="arrow"
-    // Placeholder configurations
-    enablePlaceholder
-    numberOfPlaceholderItems={8}
-    minimumPlaceholderTime={1000}
-    // Carousel configurations
-    numberOfCards={8}
-    gutter={12}
-    showSlither={true}
-    firstAndLastGutter={true}
-    freeScrolling={false}
-    // Active item configurations
-    requestToChangeActive={this.changeActiveItem}
-    activeItemIndex={this.state.activeItemIndex}
-    activePosition={"center"}
-    chevronWidth={24}
-    rightChevron={">"}
-    leftChevron={"<"}
-    outsideChevron={true}
-  >
-    {this.state.Folders.map(Folder => (
-      <div key={Folder._id}>
-        <div>
-          <img
-            onClick={evnt => {
-              this.OnFolderClicked(Folder._id);
-              // console.log(Folder._id)
-            }}
-            id={Folder._id}
-            className="folderImg"
-            alt=""
-            height="75px;"
-            // style={file.type == 'video' ? { } : {display: 'none' }}
-            src={FolderIcon}
-          />
-        </div>
-        <div>
-          <span id="folderName"> {Folder.name}</span>
-        </div>
-      </div>
-    ))}
-  </ItemsCarousel>
-</div>
-</ViewContent>
-
-
-</Col>
-</Row>
-          
-
-<Row className="show-grid" style={{marginRight: 0 + 'px'}}>
-    <Col  xs={12} sm={6}  md={8} xsOffset={0} smOffset={4}  mdOffset={3}>
-
-    <div className="table table-part" >
+                <ViewContent>
+                  <div className="foldersName">Folders</div>
+                  <div>
+                    <ItemsCarousel
+                      id="arrow"
+                      // Placeholder configurations
+                      enablePlaceholder
+                      numberOfPlaceholderItems={12}
+                      minimumPlaceholderTime={1000}
+                      // Carousel configurations
+                      numberOfCards={8}
+                      gutter={12}
+                      showSlither={true}
+                      firstAndLastGutter={true}
+                      freeScrolling={false}
+                      // Active item configurations
+                      requestToChangeActive={this.changeActiveItem}
+                      activeItemIndex={this.state.activeItemIndex}
+                      activePosition={"center"}
+                      chevronWidth={24}
+                      rightChevron={">"}
+                      leftChevron={"<"}
+                      outsideChevron={true}
+                    >
+                      {this.state.Folders.map(Folder => (
+                        <div key={Folder._id}>
+                          <div>
+                            <img
+                              onClick={evnt => {
+                                this.OnFolderClicked(Folder._id);
+                                // console.log(Folder._id)
+                              }}
+                              id={Folder._id}
+                              className="folderImg"
+                              alt=""
+                              height="75px;"
+                              // style={file.type == 'video' ? { } : {display: 'none' }}
+                              src={FolderIcon}
+                            />
+                          </div>
+                          <div>
+                            <span id="folderName"> {Folder.name}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </ItemsCarousel>
+                  </div>
+                </ViewContent>
+                {/* /////////////////////////// */}
+                <div className="table">
                   <div className="Files">
                     <Popover
                       position={Position.BOTTOM_LEFT}
@@ -685,27 +650,26 @@ class MyFiles extends React.Component {
                   </div>
   
                   <Table id='table'>
-                    <Table.Head height={50}>
+                    <Table.Head>
                       <Table.TextCell
                         flexBasis={65}
                         flexShrink={0}
                         flexGrow={0}
                       />
-                      <Table.TextHeaderCell marginLeft={15}>
+                      <Table.TextHeaderCell marginLeft={20}>
                         Name
                       </Table.TextHeaderCell>
-                      <Table.TextHeaderCell marginLeft={25}>
+                      <Table.TextHeaderCell marginLeft={20}>
                         Uploaded At
                       </Table.TextHeaderCell>
-                      <Table.TextHeaderCell>
-                      File Size</Table.TextHeaderCell>
+                      <Table.TextHeaderCell>File Size</Table.TextHeaderCell>
                       <Table.TextCell
                         flexBasis={110}
                         flexShrink={0}
                         flexGrow={0}
                       />
                     </Table.Head>
-                    <Table.Body id="myfilesTableBody">
+                    <Table.Body height={538}>
                       {this.state.Files.map(file => (
                         <Table.Row key={file._id} isSelectable height={60}>
                           <Table.TextCell
@@ -716,7 +680,7 @@ class MyFiles extends React.Component {
                             <img
                               id="img"
                               src={videoIcon}
-                              alt="img"
+                              alt="Paris"
                               style={
                                 file.type == "video" ? {} : { display: "none" }
                               }
@@ -724,7 +688,7 @@ class MyFiles extends React.Component {
                             <img
                               id="img"
                               src={FileIcon}
-                              alt="img"
+                              alt="Paris"
                               style={
                                 file.type == "application/pdf" ||
                                 file.type == "image" ||
@@ -736,7 +700,7 @@ class MyFiles extends React.Component {
                             <img
                               id="img"
                               src={PDFIcon}
-                              alt="img"
+                              alt="Paris"
                               style={
                                 file.type == "application/pdf"
                                   ? {}
@@ -750,7 +714,7 @@ class MyFiles extends React.Component {
                                   ? `http://localhost:5000/` + file.FilePath
                                   : PDFIcon
                               }
-                              alt="img"
+                              alt="Paris"
                               style={
                                 file.type == "image" ? {} : { display: "none" }
                               }
@@ -860,12 +824,7 @@ class MyFiles extends React.Component {
                     </Table.Body>
                   </Table>
                 </div>
-              
-  
-    </Col>
-  </Row>  
-              </div>
-              
+              </React.Fragment>
             );
           } else if (ctx.value.isLogin=='notLogin') {
             return (
@@ -874,8 +833,8 @@ class MyFiles extends React.Component {
           } else{
             return (
               <Pane id="DivSpinner" display="flex" alignItems="center" justifyContent="center" >
-               <img src={Loading}/>
-               
+                 {/* <Spinner size={100} /> */}
+                 <img src={l}  />
               </Pane>
                )
           }

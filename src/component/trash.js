@@ -3,11 +3,13 @@ import Context from "./context.js";
 import { Avatar, Table, IconButton,  toaster,Spinner,Pane } from "evergreen-ui";
 import Cookies from 'universal-cookie';
 import axios from  'axios';
-import PDFIcon from '../assets/pdf.svg';
-import FileIcon from '../assets/file.svg';
-import videoIcon from '../assets/video-file.svg';
-import Show from "./show.js";
+import PDFIcon from '../assets/images/pdf.svg';
+import FileIcon from '../assets/images/file3.svg';
+import videoIcon from '../assets/images/video.svg';
+import Show from "./sideBar";
 import Login from "./signin";
+import Loading from '../assets/images/loading.gif';
+import { Row ,Col } from 'react-bootstrap';
 const cookies = new Cookies();
 class Trash extends React.Component {
   constructor(){
@@ -18,7 +20,6 @@ class Trash extends React.Component {
 
 
   }
-
 
   componentDidMount(){
     fetch(`/api/files/bin/`, {
@@ -120,8 +121,10 @@ class Trash extends React.Component {
             
               <React.Fragment>
                       <Show />
-                <div className="trashcontiner">
-                  <Table>
+                      <Row className="show-grid">
+    <Col xs={12} sm={6}  md={8} xsOffset={0} smOffset={4}  mdOffset={3}  >
+    <div className="trashcontiner">
+                  <Table id="trashTable">
                     <Table.Head>
                       <Table.TextCell
                         flexBasis={65}
@@ -149,10 +152,10 @@ class Trash extends React.Component {
                             flexShrink={0}
                             flexGrow={0}
                           >
-                          <img id="img"   src={videoIcon} alt="Paris" style={file.type == 'video' ? { } : {display: 'none' }}/>
-                          <img id="img"   src={FileIcon} alt="Paris" style={file.type == 'application/pdf' ||file.type == 'image'||file.type == 'video'? { display: 'none' } : {}}/>
-                            <img id="img"   src={PDFIcon} alt="Paris" style={file.type == 'application/pdf' ? {  } : {display: 'none'}}/>
-                          <img id="img"   src={file.type == 'image'  ? `http://localhost:5000/`+file.FilePath : PDFIcon}  alt="Paris" style={file.type == 'image' ? {  } : {display: 'none'}}/>
+                          <img id="img"   src={videoIcon} alt="img" style={file.type == 'video' ? { } : {display: 'none' }}/>
+                          <img id="img"   src={FileIcon} alt="img" style={file.type == 'application/pdf' ||file.type == 'image'||file.type == 'video'? { display: 'none' } : {}}/>
+                            <img id="img"   src={PDFIcon} alt="img" style={file.type == 'application/pdf' ? {  } : {display: 'none'}}/>
+                          <img id="img"   src={file.type == 'image'  ? `http://localhost:5000/`+file.FilePath : PDFIcon}  alt="img" style={file.type == 'image' ? {  } : {display: 'none'}}/>
                           </Table.TextCell>
                           <Table.TextCell>{file.name}</Table.TextCell>
                           <Table.TextCell>{file.uptime}</Table.TextCell>
@@ -182,7 +185,10 @@ class Trash extends React.Component {
                     </Table.Body>
                   </Table>
                 </div>
-              </React.Fragment>
+             
+    </Col>
+  </Row>
+               </React.Fragment>
             );
           } else if (ctx.value.isLogin=='notLogin') {
             return ( 
@@ -191,7 +197,7 @@ class Trash extends React.Component {
           } else{
             return (
               <Pane id="DivSpinner" display="flex" alignItems="center" justifyContent="center"  >
-                <Spinner size={100} />
+              <img src={Loading}/>
               </Pane>
                )
           }

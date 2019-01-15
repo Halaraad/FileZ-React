@@ -24,7 +24,7 @@ import UploadProgress, { UploadStatus } from "react-upload-progress";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 import Cookies from "universal-cookie";
-
+import { Row ,Col } from 'react-bootstrap';
 var UploadCheck = 0;
 
 const cookies = new Cookies();
@@ -123,7 +123,7 @@ const styles = {
   }
 };
 
-class Show extends React.Component {
+class SideBar extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -175,17 +175,17 @@ class Show extends React.Component {
         );
       }
       if (progress === 100) {
-        message = (
-          <span
-            style={{
-              color: "#0884d9",
-              "margin-left": "224px",
-              "font-weight": "600"
-            }}
-          >
-            Done
-          </span>
-        );
+        // message = (
+        //   <span
+        //     style={{
+        //       color: "#0884d9",
+        //       "margin-left": "224px",
+        //       "font-weight": "600"
+        //     }}
+        //   >
+        //     Done
+        //   </span>
+        // );
       }
 
       return (
@@ -204,61 +204,42 @@ class Show extends React.Component {
   customFormRenderer(onSubmit) {
     return (
       <form
-        id="customForm"
-        method="post"
-        action="/api/files/add"
-        style={{ marginBottom: "15px" }}
-      >
-        <Heading
-          size={400}
-          marginLeft={32}
-          width="90%"
-          marginBottom={10}
-          marginTop="default"
-        >
-          Choose File
-        </Heading>
-        <FilePicker
-          marginLeft={32}
-          width="90%"
-          marginBottom={10}
-          onChange={files => console.log(files)}
-          name="file"
-        />
-        <Heading size={400} marginLeft={32} marginBottom={10}>
-          Select Folder
-        </Heading>
-        <Select name="folder" width="90%" marginBottom={10} marginLeft={32}>
-          <option checked>Main Folder</option>
-          {this.state.Folders.map((Folder, i) => (
-            <option key={Folder._id} value={Folder._id}>
-              {Folder.name}
-            </option>
-          ))}
-        </Select>
-        <input type="hidden" name="token" value={cookies.get("token")} />
-        <input type="hidden" name="public" value={1} />
-        <Heading
-          size={400}
-          marginLeft={32}
-          marginBottom={10}
-          marginTop="default"
-        >
-          Private ?
-        </Heading>
-        <Switch
-          marginLeft={32}
-          name="public"
-          value={1}
-          marginBottom={10}
-          disabled
-        />
-        <Button appearance="primary" marginLeft={200} onClick={onSubmit}>
-          Upload File
-        </Button>
-        {/* <button type="submit"  onClick={onSubmit}>Upload</button> */}
-      </form>
-    );
+      id="customForm"
+      method="post"
+      action="/api/files/add"
+      // style={{ marginBottom: "15px" }}
+>
+                  <Heading size={400}  marginLeft={32}  marginBottom={10} >Select Folder</Heading>
+                  <Select
+                  name='folder'
+                   width="90%" 
+                  marginBottom={10}
+                  marginLeft={32}
+                    >
+                    <option   checked>Main Folder</option>
+                      {
+                  this.state.Folders.map((Folder, i) => (
+                     <option  key={Folder._id} value={Folder._id} >{Folder.name}</option>
+                      ))}
+                      </Select>
+                      <input type='hidden' name="token" value={cookies.get('token')}  />
+                      <input type='hidden' name="public" value={1}  />
+                      <Heading size={400} marginLeft={32}    width="90%" marginBottom={10} marginTop="default">Choose File</Heading>
+          <FilePicker
+            marginLeft={32}  
+            width="90%" marginBottom={10} 
+            onChange={files => console.log(files)}
+            display= "none;"
+              name='file'
+            />
+                      <Heading size={400} marginLeft={32} marginBottom={10} marginTop="default">Private ?</Heading>
+                      <Switch marginLeft={32} name="public" value={1} marginBottom={10} disabled />  
+                      <Button appearance="primary" marginLeft={200} onClick={onSubmit} >Upload File</Button>   
+
+
+      {/* <button type="submit"  onClick={onSubmit}>Upload</button> */}
+    </form>
+      );
   }
 
   AddNewFolder() {
@@ -313,7 +294,7 @@ class Show extends React.Component {
     };
 
     formData.append("name", AdminName);
-    formData.append("email", AdminName);
+    formData.append("email", AdminEmail);
     formData.append("password", AdminPassword);
     axios({
       url: `/api/user/admin/add`,
@@ -331,16 +312,18 @@ class Show extends React.Component {
       })
       .catch(function (error) {
         console.log(error.request.response);
-        if (error.request.response == 'Sorry you are not A Admin') {
-
-          toaster.danger(
-            "Sorry you are not A Admin"
-          )
-        } else {
-          toaster.danger(
-            "Email Already In Use"
-          )
-        }
+        if (error.response.data.code==11000) {
+            toaster.danger('The email is already in use')
+    } else if ( error.response.data.details[0].message) {
+      toaster.danger(
+        error.response.data.details[0].message
+      )
+    } else {
+      toaster.danger(
+        'Sorry you are not A Admin'
+      )
+      
+    }
 
         console.log(error);
 
@@ -387,12 +370,17 @@ class Show extends React.Component {
         {ctx => {
           return (
             <React.Fragment>
-              <div className="main">
-                <div className="leftcomponent">
+<div>
+  <Row className="show-grid" style={{marginRight: 0 + 'px'}}>
+  <Col  xs={12} sm={12}  md={3}  >
+ 
+      
+  <div className="leftcomponent"  >
                   <div className="logo">
                     <img src="/assets/images/cloud.png" alt="" />
                     <p>FileZ</p>
                   </div>
+
 
                   <div className="myfiles">
                     <NavLink className="myfile" exact to="/files">
@@ -663,19 +651,24 @@ class Show extends React.Component {
                       strokeColor="#427fed"
                     />
                     <div className="storparg">
-                      <p>
+                      <p id="Pstorparg">
                         {(100 - ctx.value.Session.limit / 1000000).toFixed(2)}{" "}
                         MB of {ctx.value.PackageSize / 1000000} MB used
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </React.Fragment>
+                      
+
+    </Col>
+
+  </Row>
+  </div>
+              </React.Fragment>
           );
         }}
       </Context.Consumer>
     );
   }
 }
-export default Show;
+export default SideBar;

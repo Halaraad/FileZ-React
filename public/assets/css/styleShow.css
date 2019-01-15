@@ -1,0 +1,358 @@
+/* body {
+  margin: 0px;
+  padding: 0px;
+  color: #7e87a1;
+  font-family: Roboto;
+} */
+a:link,
+a:visited,
+a:hover,
+a:active {
+  /* Essentially means a[href], or that the link actually goes somewhere */
+  color: #7e87a1;
+  text-decoration: none;
+}
+.active {
+  border-left: solid 5px #4fa1e4;
+}
+.actbin {
+  border-left: solid 5px red;
+}
+.main {
+  height: 100%;
+  width: 100%;
+  background-color: #f4f5fa;
+  position: fixed;
+  z-index: 2;
+}
+.leftcomponent {
+  /* height: 100%; */
+  /* width: 250px; */
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* padding-top: 40px; */
+  text-align: center;
+  /* position: fixed; */
+  /* overflow-x: hidden; */
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  background-color: #ffffff;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  
+}
+
+.logo {
+  margin-bottom: 40px;
+  margin-left: -10px;
+}
+.logo img {
+  margin: 20px 43px;
+}
+.logo p {
+  margin-top: -20px;
+  font-size: 25px;
+  font-weight: 700;
+}
+.myfiles {
+  height: 50px;
+  margin-bottom: 10px;
+}
+.myfile {
+  height: 100%;
+  width: 67%;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  padding-top: 12px;
+}
+.myfile img {
+  width: 25px;
+  height: 25px;
+  margin-top: -2px;
+}
+.myfile a {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+}
+.bins {
+  height: 50px;
+  margin-bottom: 10px;
+}
+.bin {
+  height: 100%;
+  width: 67%;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  padding-top: 12px;
+}
+.bin img {
+  width: 30px;
+  height: 30px;
+  margin-top: -4px
+}
+.bin a {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: -15px;
+}
+.admins {
+  height: 50px;
+  margin-bottom: 10px;
+}
+.admin {
+  height: 100%;
+  width: 67%;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  padding-top: 12px;
+}
+.admin img {
+  height: 25px;
+  width: 25px;
+  margin-top: -2px;
+  margin-left: 7px;
+}
+.admin a {
+  font-weight: 500;
+  font-size: 18px;
+}
+.leftcomponent-link {
+  font-weight: 500;
+  font-size: 16.5px;
+  margin-left: 30px;
+
+}
+.fas-icon {
+  margin-left: -50px!important;
+}
+.fas-icon2 {
+  margin-left: -30px!important;
+}
+.leftcomponent-link2 {
+  font-weight: 500;
+  font-size: 16.5px;
+  margin-left: 25px;
+}
+.fas-icon3 {
+  margin-left: -30px!important;
+}
+.leftcomponent-link3 {
+  font-weight: 500;
+  font-size: 16.5px;
+  margin-left: 20px;
+}
+.fas-icon4 {
+  margin-left: -30px!important;
+}
+.leftcomponent-link4 {
+  font-weight: 500;
+  font-size: 16.5px;
+  margin-left: 20px;
+}
+.pane-container {
+  height: 50px;
+  padding-top: -110px;
+  margin-bottom: 15px;
+}
+.storimg {
+  padding-top: 20px;
+  margin-top: 8%;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+.storimg img {
+  height: 25px;
+  width: 25px;
+  margin-top: -3px;
+}
+.storimg p {
+  margin-left: 10px;
+}
+.szlider {
+  width: 130px;
+  height: 6px;
+  border: 1px solid #7e87a1;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.szliderbar {
+  height: 15px;
+  border-right: 1px solid #7e87a1;
+  background: rgb(14, 120, 190);
+}
+#Pstorparg{
+font-size: 1.1rem;
+}
+.storparg {
+  font-size: 0.8rem;
+  margin-top: 10px;
+font-weight: 500;
+}
+.sorage {
+  /* display: flex; */
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+.NavLink-auth.active{
+  border-bottom: solid 6px white;
+}
+
+
+@media screen and (max-width: 770px) {
+  .trashcontiner {
+    color: #7e87a1;
+    font-family: Roboto;
+    z-index: 5;
+    background-color: #f4f5fa;
+    height: 90%;
+    width: 93.53%;
+    padding: 10% 0;
+    position: absolute;
+}
+  .leftcomponent {
+    width: 100%;
+    height: auto;
+    position: relative;
+
+  }
+  .myfile {
+    height: 100%;
+    width: 70%;
+    margin-right: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+    padding-top: 12px;
+    display: inline-table;
+}
+.myfile img {
+  width: 25px;
+  height: 25px;
+  margin-top: -2px;
+  margin-right: 15px;
+}
+.bin {
+  height: 100%;
+  width: 70%;
+  /* margin-right: auto; */
+  display: inline-table;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  padding-top: 12px;
+  margin-right: 20px;
+}
+.bin a {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: -30px;
+}
+.bin img {
+  width: 34px;
+  height: 33px;
+  margin-top: -4px;
+  margin-right: 37px;
+}
+.admin {
+  height: 100%;
+  width: 67%;
+  margin-right: auto;
+  /* display: flex; */
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  padding-top: 12px;
+  display: inline-table;
+  margin-right: 10px;
+}
+.admin a {
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 14px;
+}
+.admin img {
+  height: 30px;
+  width: 28px;
+  margin-top: -2px;
+  margin-left: 9px;
+}
+.admins {
+  height: 50px;
+  margin-bottom: 10px;
+}
+#addFileIcon {
+  font-size: 25px;
+  color: #7e87a1;
+  outline: none;
+  margin-right: -60px;
+  margin-top: 13px;
+  cursor: pointer;
+}
+.leftcomponent-link{
+  margin-inline-start: 0px;
+}
+
+.leftcomponent-link2{
+  margin-inline-start: 0px;
+}
+#addFolderIcon {
+  font-size: 25px;
+  color: #7e87a1;
+  outline: none;
+  margin-left: 45px;
+  margin-top: 13px;
+  cursor: pointer;
+  margin-right: -52px;
+}
+.leftcomponent-link3{
+  margin-inline-start: 0px;
+}
+.leftcomponent-link4{
+  margin-inline-start: 0px;
+}
+.szlider {
+  width: 132px;
+  height: 6px;
+  border: 1px solid #7e87a1;
+  overflow: hidden;
+  margin-top: 10px;
+  height: 15px;
+}
+.storimg p {
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+.storimg img {
+  height: 30px;
+  width: 30px;
+  margin-top: -3px;
+}
+}
+
+@media screen and (max-width: 400px) {
+  .leftcomponent a {
+    text-align: center;
+    float: none;
+  
+
+  }
+ 
+
+}

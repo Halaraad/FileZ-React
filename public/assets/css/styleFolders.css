@@ -1,0 +1,46 @@
+.foldersName {
+  margin-left: 22px;
+  margin-top: -40px;
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.folderImg {
+  width: 80px;
+  margin-bottom: -20px
+}
+#folderName {
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+#addFileIcon {
+  font-size: 25px;
+  color: #7e87a1;
+  outline: none;
+  margin-left: 45px;
+  margin-top: 13px;
+  cursor: pointer;
+}
+#addFolderIcon {
+  font-size: 25px;
+  color: #7e87a1;
+  outline: none;
+  margin-left: 45px;
+  margin-top: 13px;
+  cursor: pointer;
+}
+
+#test {
+  min-width: 160px;
+  max-width: 500;
+}
+#DivSpinner{
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+
+

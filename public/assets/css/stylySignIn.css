@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900');
+.auth {
+  width: 60%;
+  height: 100%;
+  background-color: #F4F5FA;
+  color: rgba(51, 51, 51, 0.75);
+  font-family: 'Roboto', sans-serif;
+  border-left: 1px solid #e5e5e5;
+  text-align: left;
+}
+.Authenticate {
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 8%;
+}
+.username input,
+.email input,
+.password input {
+  width: 70%;
+  height: 50px;
+  box-shadow: 0px 0px 20px #E5E5E5;
+  font-size: 1.1rem;
+  padding-left: 15px;
+  color: rgba(51, 51, 51, 0.75);
+  border-radius: 5px;
+  border: 0px;
+  font-weight: bold;
+  font-size: 16px;
+  text-indent: 40px;
+}
+.username input::placeholder,
+.email input::placeholder,
+.password input::placeholder {
+  font-weight: bold;
+  font-size: 16px;
+  text-indent: 40px;
+}
+.username input {
+  background-image: url('/assets/images/user.png');
+  background-repeat: no-repeat;
+  background-position-x: 15px;
+  background-position-y: 10px;
+  background-size: 30px;
+}
+.password input {
+  background-image: url('/assets/images/lock.png');
+  background-repeat: no-repeat;
+  background-position-x: 17px;
+  background-position-y: 12px;
+  background-size: 25px;
+}
+.email input {
+  background-image: url('/assets/images/email2.png');
+  background-repeat: no-repeat;
+  background-position-x: 18px;
+  background-position-y: 13px;
+  background-size: 22px;
+}
+.email {
+  margin-top: 5%;
+}
+.password {
+  margin-top: 5%;
+}
+.username i,
+.email i,
+.password i {
+  margin-right: 20px;
+}
+.authform {
+  text-align: center;
+  margin-top: 8%;
+}
+.btnauth {
+  width: 160px;
+  height: 55px;
+  margin-top: 40px;
+  border-radius: 5px;
+  border: 0px;
+  box-shadow: 0px 0px 10px #C4C4C4;
+  background-color: #0f65b2;
+  font-size: 1.6rem;
+  font-family: Roboto;
+  font-weight: bold;
+  color: #EEEEEE;
+}
+.linkSignUp {
+  text-align: center;
+  margin-top: 13%;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  color: #666666
+}
+.linkSignUp span {
+  width: 300px;
+  height: 30px;
+}
+.on-signup {
+  margin-top: 4%;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .auth {
+    width: 100%;
+    height: 100%;
+  }
+  .username input,
+  .email input,
+  .password input {
+    height: 50px;
+  }
+  .on-signup {
+    margin-top: 25px;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) {
+  .auth {
+    width: 100%;
+    height: 100%;
+  }
+  .username input,
+  .email input,
+  .password input {
+    height: 50px;
+  }
+  .on-signup {
+    margin-top: 25px;
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  .auth {
+    width: 60%;
+    height: 100%;
+  }
+  .username input,
+  .email input,
+  .password input {
+    height: 50px;
+  }
+  .on-signup {
+    margin-top: 25px;
+  }
+  .trashcontiner {
+    color: #7e87a1;
+    font-family: Roboto;
+    z-index: 5;
+    background-color: #f4f5fa;
+    height: 90%;
+    width: 94%;
+    padding: 10% 0;
+    position: absolute;
+} 
+}
+html,body {
+  height: 100%;
+  background-color: #f4f5fa;
+}
+.authmain{
+  background-size: contain;
+  font-family: 'Roboto', sans-serif;
+  background-repeat: no-repeat;
+  background-position: center;
+  background: linear-gradient(270deg, #30D2BE 0%, #0F65B2 51.93%, #473B7B 100%);
+  width: auto;
+  height: auto;
+}
+#root{
+  width: 100%;
+  height: 100%;
+  background-color: #f4f5fa;
+}
