@@ -24,6 +24,11 @@ $ npm i
 ```
 $ npm start 
 ```
+## Admin Account
+```
+Email:rasheed@rasheed
+Password:123456
+```
 [Live Demo](https://file-z.herokuapp.com/)
 
 ### Server [Repo](https://github.com/rasheed92/FileZ-Server)
