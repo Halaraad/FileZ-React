@@ -1,0 +1,19 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" opacity="0.2" id="svg_6" fill="#231F20" d="m37.142106,23.800729l0,-10.603968l-22.067312,0c-2.150914,0 -3.894232,1.582348 -3.894232,3.534656l0,40.059436c0,1.952308 1.743318,3.534656 3.894232,3.534656l33.750007,0c2.150914,0 3.894232,-1.582348 3.894232,-3.534656l0,-29.455468l-11.682695,0c-2.150914,0 -3.894232,-1.582348 -3.894232,-3.534656z"/>
+  <path stroke="null" id="svg_8" fill="#3f7f00" d="m37.167207,17.692284l0,-11.716581l-22.173991,0c-2.161312,0 -3.913057,1.748374 -3.913057,3.905527l0,44.262641c0,2.157153 1.751745,3.905527 3.913057,3.905527l33.913163,0c2.161312,0 3.913057,-1.748374 3.913057,-3.905527l0,-32.546059l-11.739172,0c-2.161312,0 -3.913057,-1.748374 -3.913057,-3.905527z"/>
+  <polygon stroke="null" opacity="0.2" id="svg_10" points="38.522098541259766,20.783882342278957 52.819461822509766,33.683870516717434 52.819461822509766,21.722210131585598 " fill="#231F20"/>
+  <path stroke="null" id="svg_12" fill="#f4f5fa" d="m37.104454,5.975704l0,11.786238c0,2.169977 1.725058,3.928746 3.853442,3.928746l11.560326,0l-15.413768,-15.714984z"/>
+  <rect stroke="#ffffff" opacity="0.2" id="svg_14" y="22" x="22" width="9.625" height="2" fill="#ffffff"/>
+  <rect stroke="#ffffff" opacity="0.2" id="svg_16" y="32" x="22" width="20" height="2" fill="#ffffff"/>
+  <rect stroke="#ffffff" opacity="0.2" id="svg_18" y="27" x="22" width="20" height="2" fill="#ffffff"/>
+  <rect stroke="#ffffff" opacity="0.2" id="svg_20" y="37" x="22" width="20" height="2" fill="#ffffff"/>
+  <rect stroke="#ffffff" opacity="0.2" id="svg_22" y="42" x="22" width="20" height="2" fill="#ffffff"/>
+ </g>
+</svg>

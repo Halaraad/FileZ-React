@@ -1,0 +1,129 @@
+.table {
+  color: #7e87a1;
+  font-family: Roboto;
+  z-index: 6; 
+  background: #f4f5fa;
+  height: 571px;
+  width: 100%;
+  height: 100%;
+}
+
+.SortIcon {
+  cursor: pointer;
+}
+
+#deleteFolder {
+  display: none;
+  margin-left: 10px;
+}
+
+#undoFolder {
+  display: none;
+  margin-left: 10px;
+}
+
+.files-menu {
+  margin-left: 0px;
+  position: absolute;
+  font-size: 1.2rem;
+  margin-top: -39px;
+  display: flex;
+}
+
+.files-menu button {
+  /* border: none !important; */
+  border: 1px solid #cccccc !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 50px;
+}
+
+.files-lable {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #7e87a1;
+}
+
+#table {
+  width: 100%;
+  background: transparent;
+}
+
+.table-head {
+  background: #f4f5fa !important;
+  border: none !important;
+}
+
+.table-cols {
+  padding-left: 0 !important;
+}
+
+.table-cols-head {
+  font-size: 15px;
+  font-weight: 600;
+  color: #7e87a1;
+}
+
+#table-body {
+  height: auto;
+  max-height: 750px;
+}
+
+.table-body-row {
+  height: 65px !important;
+  border: none !important;
+  box-shadow: 0px 0px 10px rgba(171, 171, 171, 0.25);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  padding: 0 10px;
+}
+
+#table-files-icon {
+  width: 30px;
+  height: auto;
+}
+
+#table-user-icon {
+  width: 40px;
+  height: 40px;
+  background: rgb(107, 26, 26);
+  border-radius: 50%;
+  padding: 13px 12px;
+}
+
+.user-char {
+  color: #cccccc;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.table-body-row-span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #7e87a1;
+}
+
+.download-border {
+  border: 1px solid green !important;
+  box-shadow: none !important;
+}
+
+.addtofolder-border {
+  border: 1px solid grey !important;
+  box-shadow: none !important;
+}
+
+.trash-border {
+  border: 1px solid red !important;
+  box-shadow: none !important;
+}
+
+div::-webkit-scrollbar {
+  width: 10px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #7e87a1;
+  border-radius: 50px;
+}

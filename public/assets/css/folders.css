@@ -1,0 +1,78 @@
+.empty-account {
+  color: #7e87a1;
+  font-weight: 400;
+  margin: 100px;
+  letter-spacing: 1px; 
+}
+
+.folders-lable {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #7e87a1;
+}
+
+#arrow {
+  font-size: 30px;
+  font-weight: bolder;
+  color: #607D8B;
+}
+
+.chevron {
+  margin-top: -20px;
+}
+
+.chevron img {
+  width: 25px;
+  height: auto;
+}
+
+.folder-img {
+  width: 60px;
+  height: auto;
+}
+
+#folder-name {
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #7e87a1;
+  display: inline-block;
+  max-width: 50%;
+  height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #7e87a1;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .folder-img {
+    width: 25px;
+    height: auto;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 770px) {
+  .folder-img {
+    width: 32px;
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .folder-img {
+    width: 38px;
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .folder-img {
+    width: 38px;
+    height: auto;
+  }
+}

@@ -1,0 +1,123 @@
+.main-row {
+  background: #f4f5fa;
+  padding: 0;
+  margin: 0;
+}
+
+.main-col-left {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  position: fixed !important;
+  width: 280px !important;
+  z-index: 999;
+}
+
+.main-col-right {
+  background: #f4f5fa;
+  padding: 0 !important;
+  margin-left: 280px !important;
+  width: calc(100% - 280px) !important;
+}
+
+.header-row {
+  background: #f4f5fa;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+}
+
+.header-col {
+  background: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+.folders-row {
+  background: #f4f5fa;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 100px;
+}
+
+.folders-col {
+  background: #f4f5fa;
+  padding: 0;
+  margin: 0;
+}
+
+.table-row {
+  background: #f4f5fa;
+  padding: 0;
+  margin: 0;
+}
+
+.table-col {
+  background: #f4f5fa;
+  padding: 0;
+}
+
+#DivSpinner {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .main-row {
+    width: 100%;
+  }
+  .main-col-left {
+    width: 100% !important;
+    height: auto;
+    position: relative !important;
+  }
+  .main-col-right {
+    width: 100% !important;
+    /* margin: 0 auto; */
+    margin-left: 0 !important;
+    margin-top: 50px;
+  }
+  .header-row {
+    border-top: 1px solid #cccccc;
+    width: 96%;
+  }
+  .folders-row {
+    padding-left: 5px;
+  }
+  .table-row {
+    padding-left: 5px;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 770px) {
+  .main-row {
+    width: 100%;
+    padding: 0 auto !important;
+  }
+  .main-col-left {
+    width: 100% !important;
+    height: auto;
+    position: relative !important;
+  }
+  .main-col-right {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 50px;
+  }
+  .header-row {
+    border-top: 1px solid #cccccc;
+    width: 98%;
+  }
+  .folders-row {
+    padding-left: 5px;
+  }
+  .table-row {
+    padding-left: 5px;
+  }
+}

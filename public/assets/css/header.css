@@ -1,0 +1,249 @@
+.header {
+  color: #7e87a1;
+  font-family: Roboto;
+  background: #ffffff;
+  height: 100px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.headerr {
+  color: #7e87a1;
+  font-family: Roboto;
+  background: #ffffff;
+  height: 100px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: flex-end;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.search-div {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 35%;
+  background: #ffffff;
+}
+
+.search-icon {
+  margin-right: 10px;
+}
+
+.header input {
+  height: 40px;
+  border-radius: 50px;
+  width: 97%;
+  font-size: 1.6rem;
+  color: #7e87a1;
+  padding-right: 20px;
+  padding-left: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-family: "SF UI Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.header-div-right {
+  display: flex;
+  align-items: center;
+}
+
+.chooseplan-btn {
+  height: 40px;
+  width: 120px;
+  border: solid 1px #0f65b2;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+.chooseplan-form {
+  margin-top: 20px;
+}
+
+.card-name {
+  position: absolute;
+  font-size: 1.5rem;
+  color: #2196f3;
+  font-weight: 500;
+  margin: 8px 50px;
+ }
+
+ .lables-container {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+ }
+
+.lables-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  margin-left: 20px;
+ }
+
+ .lables-container:hover input ~ .checkmark {
+  background-color: #eee;
+ }
+
+ .lables-container input:checked ~ .checkmark {
+  background-color: #2196f3;
+ }
+
+ .lables-container input:checked ~ .checkmark:after {
+  display: block;
+ }
+
+ .lables-container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+ }
+
+ .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-top: 100px;
+ }
+
+ .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+ }
+
+ .MB {
+  position: absolute;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 30px;
+  margin-top: 40px
+ }
+
+.user-img {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#profile-img {
+  width: 40px;
+  border-radius: 50%;
+  height: 40px;
+  margin-top: -3px;
+}
+
+#user-img-char {
+  width: 40px;
+  height: 40px;
+  background: #6b1a1a;
+  border-radius: 50%;
+  padding: 6px 12px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  height: auto;
+  margin-left: -260px;
+  margin-top: 3px;
+  border-radius: 3px;
+  border: 1px solid #ababab;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-header {
+  padding: 0 30px!important;
+  background: #ffffff;
+  display: flex!important;
+  justify-content: flex-start;
+  height: 80px;
+  align-items: center;
+}
+
+.session-info-div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 30px;
+  padding: 0;
+  width: 170px;
+}
+
+.session-info {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.dropdown-footer {
+  background: #f4f5fa;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-top: 1px solid #ababab;
+  text-align: center;
+}
+
+.dropdown-footer button {
+  color: #f4f5fa;
+  background: #6b1a1a;
+}
+
+.dropdown-footer button:hover {
+  color: #cccccc;
+  background: #6b1a1a !important;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  .user-img {
+    margin-left: 5px;
+  }
+  .header {
+    padding: 0;
+  }
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 770px) {
+
+}
