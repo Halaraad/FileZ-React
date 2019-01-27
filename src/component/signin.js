@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import Context from "./context.js";
 import MyFiles from "./myFiles";
 const cookies = new Cookies();
-
+var host="http://localhost:5000/"
 class SignIn extends React.Component {
   constructor() {
     super();
@@ -24,7 +24,7 @@ class SignIn extends React.Component {
 
   Login(event) {
     event.preventDefault();
-    axios.post("https://filez-node-v2.herokuapp.com/api/user/login", {
+    axios.post(host+`api/user/login`, {
         email: this.state.Email,
         password: this.state.Password
       })

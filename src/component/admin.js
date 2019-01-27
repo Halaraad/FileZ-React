@@ -7,6 +7,7 @@ import MyFiles from "./myFiles";
 import Context from "./context.js";
 import Sidebar from "./sidebar";
 import Signin from "./signin";
+var host="http://localhost:5000/"
 
 const cookies = new Cookies();
 
@@ -84,7 +85,7 @@ class Admin extends React.Component {
                                 <Table.Row className="table-body-row" height={60} key={user._id}>
 
                                   <Table.TextCell flexBasis={80} flexShrink={0} flexGrow={0}>
-                                    <img id="table-files-icon" src={ `https://filez-node-v2.herokuapp.com/` + user.porfileImg } alt="img"
+                                    <img id="table-files-icon" src={ host + user.porfileImg } alt="img"
                                       style={ user.porfileImg != "defaultUser.png"
                                           ? {}
                                           : { display: "none" }

@@ -7,7 +7,8 @@ import FileUploadProgress from "react-fileupload-progress";
 import Cookies from "universal-cookie";
 
 import Context from "./context.js";
-
+var host="http://localhost:5000/"
+var fid
 const cookies = new Cookies();
 
 var UploadCheck = 0;
@@ -16,6 +17,7 @@ var AdminName = "";
 var AdminEmail = "";
 var FolderName = "";
 var ProfilePicture;
+var Folder_id
 var UserName = "";
 
 const styles = {
@@ -52,12 +54,39 @@ class Sidebar extends React.Component {
   constructor() {
     super();
     this.state = {
-      Folders: ""
+      Folders: [],
+      SubFolders:[],
+      FoldersPath:[]
     };
   }
 
-  componentDidMount() {
-    fetch(`https://filez-node-v2.herokuapp.com/api/folder/`, {
+  componentDidMount(value) {
+    if (document.getElementById('rowTest')) {
+      document.getElementById('rowTest').remove()
+    }
+
+    if (value) {
+      fetch(host+`api/folder/folder/`+value, {
+        credentials: "same-origin",
+        headers: {
+          token: cookies.get("token")
+        }
+      })
+        .then(response => {
+          if (response.status == 200) {
+            return response.json();
+          }
+        })
+        .then(data => {
+          if (data) {
+            this.setState({
+              Folders: data[0].Folder
+            });
+          }
+          this.AddSubFolder()
+        });
+    } else {    
+    fetch(host+`api/folder/`, {
       credentials: "same-origin",
       headers: {
         token: cookies.get("token")
@@ -75,8 +104,30 @@ class Sidebar extends React.Component {
           });
         }
       });
+    }
   }
+  AddSubFolder(){
+ 
+    if (this.state.SubFolders) {
+      
 
+    
+  for (let index = 0; index < this.state.SubFolders.length; index++) {
+    var div = document.createElement('div');
+    div.id = 'rowTest';
+    div.innerHTML =`  <input type="radio" name="folder"" value="${this.state.SubFolders[index]._id}">${this.state.SubFolders[index].name}<br>`
+    document.getElementById('content').appendChild(div); 
+  }
+    
+
+          // `<input type="text" name="name" value="" />\
+          // <input type="text" name="value" value="" />\
+          // <label> <input type="checkbox" name="check" value="1" /> Checked? </label>`;
+  
+     
+  }
+    }
+  
   formGetter() {
     return new FormData(document.getElementById("customForm"));
   }
@@ -121,19 +172,83 @@ class Sidebar extends React.Component {
 
   customFormRenderer(onSubmit) {
     return (
-      <form id="customForm" method="post" action="https://filez-node-v2.herokuapp.com/api/files/add">
+      <form id="customForm" method="post" action={host+`api/files/add`}>
         <Heading size={400} marginLeft={32} marginBottom={10}>
           Select Folder
         </Heading>
+        <input name="folder"  type="hidden" value={fid}/>
+        <Component initialState={{ isShown: false }}>
+  {({ state, setState }) => (
+    <Pane>
+      <Dialog
+        isShown={state.isShown}
+        onConfirm={()=>{
+          setState({ isShown: false })
+          this.componentDidMount()
+        }}
+        title="Select Folder"
+        onCloseComplete={() => setState({ isShown: false })}
+        confirmLabel="Select"
+      >
+       <ul className="breadcrumb">
+       <li><a onClick={()=>{
+                        this.componentDidMount()
+                         this.setState({
+                         FoldersPath:[]
+                         })
+                      }}>Home</a></li>
+                      {this.state.FoldersPath.map((Folder,i) => (
+                            <li><a href="#" onClick={()=>{
+                              this.componentDidMount(Folder._id)
+                              var l=this.state.FoldersPath.length
+                              var x=this.state.FoldersPath
+                              x.length = i+1;
+                            }}>{Folder.name}</a></li>
+                              ))}
+                    </ul>
+      <div className="FoldersModel">
+      <div >
+     <div >
+        <img
+      onClick={evnt => {
+       fid="Main Folder"
+       this.setState({
+         Folders:[]
+       })
+      }}
+       width="50" height="50" alt="" src="/assets/images/mainFolder.png"/>
+                                  </div>
+                                  <div>
+                                    <span id="folder-name">Main Folder</span>
+                                  </div>
+                                </div>
+      
+      {this.state.Folders.map(Folder => (
+                                <div key={Folder._id}>
+                                  <div >
+                                    <img
+                                      onClick={evnt => {
+                                        fid=Folder._id
+                                        this.componentDidMount(Folder._id)
+                                        let Folders = [...this.state.FoldersPath, Folder];
+                                        this.setState({
+                                          FoldersPath:Folders
+                                        })
+                                      }}
+                                      id={Folder._id} width="50" height="50" alt="" src="/assets/images/mainFolder.png"/>
+                                  </div>
+                                  <div>
+                                    <span id="folder-name">{Folder.name}</span>
+                                  </div>
+                                </div>
+                              ))}
+        </div>
+      </Dialog>
 
-        <Select name="folder" width="90%" marginBottom={10} marginLeft={32}>
-          <option checked>Main Folder</option>
-          {this.state.Folders.map((Folder, i) => (
-            <option key={Folder._id} value={Folder._id}>
-              {Folder.name}
-            </option>
-          ))}
-        </Select>
+      <a  onClick={() => setState({ isShown: true })}>Show Dialog</a>
+    </Pane>
+  )}
+</Component>
         <input type="hidden" name="token" value={cookies.get("token")} />
         <input type="hidden" name="public" value={1} />
         
@@ -178,7 +293,7 @@ class Sidebar extends React.Component {
                         }}
                         confirmLabel="Upload File">
 
-                        <FileUploadProgress key="ex2" url="https://filez-node-v2.herokuapp.com/api/files/add"
+                        <FileUploadProgress key="ex2" url={host+`api/files/add`}
                           onProgress={(e, request, progress) => {
                             UploadCheck = progress;
                             console.log(UploadCheck);

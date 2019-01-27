@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import Context from "./context.js";
 import Sidebar from "./sidebar";
 import Signin from "./signin";
-
+var host="http://localhost:5000/"
 const cookies = new Cookies();
 class Trash extends Component {
   constructor() {
@@ -45,7 +45,7 @@ class Trash extends Component {
                                         ? { display: "none" }
                                         : {}
                                     }
-                                    src={ `https://filez-node-v2.herokuapp.com/` + ctx.value.Session.porfileImg }/>
+                                    src={ host + ctx.value.Session.porfileImg }/>
                                 </span>
                                 <div className="dropdown-content">
                                   <div className="dropdown-header">
@@ -63,7 +63,7 @@ class Trash extends Component {
                                             ? { display: "none" }
                                             : {}
                                         }
-                                        src={ `https://filez-node-v2.herokuapp.com/` + ctx.value.Session.porfileImg }/>
+                                        src={ host + ctx.value.Session.porfileImg }/>
                                     </span>
                                     <div className="session-info-div">
                                       <span className="session-info">
@@ -146,7 +146,7 @@ class Trash extends Component {
                                           : { display: "none" }
                                       } />
                                     <img id="table-files-icon" src={ file.type == "image"
-                                          ? `https://filez-node-v2.herokuapp.com/` + file.FilePath
+                                          ? host + file.FilePath
                                           : "/assets/images/pdf.svg"
                                       }
                                       alt="img"

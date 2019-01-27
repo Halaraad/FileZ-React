@@ -12,7 +12,8 @@ import Context from "./context.js";
 const cookies = new Cookies();
 var FolderID='';
 var RadioValue='';
-
+var FolderName;
+var host="http://localhost:5000/"
 var SelectFolderOnUpload;
 
 let ModelPlan = styled.div`
@@ -78,6 +79,7 @@ class MyFiles extends React.Component {
       activeItemIndex: 0,
       Files: [],
       Folders: [],
+      FoldersPath: [],
       FileNames: "",
     };
   }
@@ -200,7 +202,7 @@ class MyFiles extends React.Component {
                                         ? { display: "none" }
                                         : {}
                                     }
-                                    src={ `https://filez-node-v2.herokuapp.com/` + ctx.value.Session.porfileImg }/>
+                                    src={ host + ctx.value.Session.porfileImg }/>
                                 </span>
                                 <div className="dropdown-content">
                                   <div className="dropdown-header">
@@ -224,7 +226,7 @@ class MyFiles extends React.Component {
                                             ? { display: "none" }
                                             : {}
                                         }
-                                        src={ `https://filez-node-v2.herokuapp.com/` + ctx.value.Session.porfileImg }/>
+                                        src={ host + ctx.value.Session.porfileImg }/>
                                     </span>
                                     <div className="session-info-div">
                                       <span className="session-info">
@@ -255,6 +257,22 @@ class MyFiles extends React.Component {
                     <React.Fragment>
                     <Row className="folders-row" style={{ marginLeft: 0 + "px", marginRight: 0 + "px" }}>
                       <Col className="folders-col" xs={12} sm={12} md={10} xsOffset={0} smOffset={0} mdOffset={1}>
+                      <ul className="breadcrumb">
+                      <li><a onClick={()=>{
+                       ctx.actions.CloseFolder()
+                         this.setState({
+                         FoldersPath:[]
+                         })
+                      }}> <Icon icon="home" color="success" /> Home</a></li>
+                      {this.state.FoldersPath.map((Folder,i) => (
+                            <li><a href="#" onClick={()=>{
+                              ctx.actions.test(Folder._id)
+                              var l=this.state.FoldersPath.length
+                              var x=this.state.FoldersPath
+                              x.length = i+1;
+                            }}><Icon icon="folder-open" color="info" /> {Folder.name}</a></li>
+                              ))}
+                    </ul>
                       <h4 className="folders-lable"
                              style={ctx.value.Folders == '' ? {}
                              : { display: "none" }}>Folders is empty.</h4>
@@ -288,9 +306,16 @@ class MyFiles extends React.Component {
                                     <img
                                       onClick={evnt => {
                                         ctx.actions.OpenFolder(Folder._id);
+                                        let Files = [...this.state.FoldersPath, Folder];
+                                        this.setState({
+                                          FoldersPath:Files
+                                        })
+                                        console.log(this.state.FoldersPath)
+
                                         FolderID=Folder._id;
                                         document.getElementById('undoFolder').style.display="flex"
                                         document.getElementById('deleteFolder').style.display="flex"
+                                        document.getElementById('AddFolder').style.display="flex" 
                                       }}
                                       id={Folder._id} className="folder-img" alt="" src="/assets/images/mainFolder.png"/>
                                   </div>
@@ -356,16 +381,50 @@ class MyFiles extends React.Component {
                               </Button>
                             </Popover>
 
-                            <IconButton id="undoFolder" icon="undo" intent="success" height={40}
+                            <IconButton id="undoFolder" icon="home" intent="success" height={40}
                               onClick={() => {
                                 ctx.actions.CloseFolder()
+                                this.setState({
+                                  FoldersPath:[]
+                                })
                                 FolderID=""
                                 document.getElementById('deleteFolder').style.display="none" 
-                                document.getElementById('undoFolder').style.display="none" }}/> 
+                                document.getElementById('undoFolder').style.display="none" 
+                                document.getElementById('AddFolder').style.display="none" 
+                             }}/> 
 
                             <IconButton icon="delete" id="deleteFolder" intent="success" height={40}
                               onClick={() => {
                                 ctx.actions.DeleteFodler(FolderID) }}/> 
+                <Component initialState={{ isShown: false }}>
+                  {({ state, setState }) => (
+                    <Pane marginTop={0} className="pane-container">
+                      <Dialog isShown={state.isShown}
+                        onConfirm={() => {
+                          ctx.actions.AddNewFolder(FolderName,FolderID);
+                          setState({ isShown: false });
+                        }}
+                        title="Add New Folder"
+                        onCloseComplete={() => setState({ isShown: false })}
+                        confirmLabel="Add">
+
+                        <Heading size={400} marginLeft={32} marginBottom={10}>
+                          Choose Folder Name
+                        </Heading>
+
+                        <TextInput
+                          onChange={event => {
+                            FolderName = event.target.value;
+                          }}
+                          width="90%" marginLeft={32} marginBottom={10} placeholder="Folder Name..."
+                        />
+                      </Dialog>
+                      <IconButton icon="folder-new" id="AddFolder"  intent="success" height={40}
+                               onClick={() => setState({ isShown: true })}/> 
+                    </Pane>
+                  )}
+                </Component>
+                              
                           </div>
                           <br tyle={ctx.value.Files == '' ? {}
                              : { display: "none" }}></br>
@@ -420,7 +479,7 @@ class MyFiles extends React.Component {
                                           : { display: "none" }
                                       }/>
                                     <img id="table-files-icon" src={ file.type == "image"
-                                          ? `https://filez-node-v2.herokuapp.com/` + file.FilePath
+                                          ? host + file.FilePath
                                           : "/assets/images/file.svg" }
                                       alt="img"
                                       style={ file.type == "image"
@@ -444,7 +503,7 @@ class MyFiles extends React.Component {
                                   <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
                                     <IconButton className="download-border" icon="import" intent="success"
                                       onClick={() => {
-                                        window.open("https://filez-node-v2.herokuapp.com/" + file.FilePath, "_blank");
+                                        window.open(host + file.FilePath, "_blank");
                                       }}/>
                                   </Table.TextCell>
 

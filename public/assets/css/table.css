@@ -15,19 +15,63 @@
 #deleteFolder {
   display: none;
   margin-left: 10px;
+  COLOR: #d21313;
 }
 
 #undoFolder {
   display: none;
   margin-left: 10px;
+  color: #47b881;
 }
 
+#AddFolder {
+  margin-left: 10px;
+  display: none;
+  color: #4da1ff;
+}
 .files-menu {
   margin-left: 0px;
   position: absolute;
   font-size: 1.2rem;
   margin-top: -39px;
   display: flex;
+}
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background-color: #ffffff;
+}
+.FoldersModel{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* background-color: #2196F3; */
+  padding: 10px;
+  
+  grid-template-columns: repeat(5, 100px);
+}
+/* Display list items side by side */
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
 }
 
 .files-menu button {
