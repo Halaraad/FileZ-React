@@ -43,6 +43,7 @@ class App extends Component {
       FilesSizeInfo: "",
       FilesNumber: "",
       TrashFiles: [],
+      FoldersPath: [],
       FilesInTrash: ""
     };
   }
@@ -629,8 +630,9 @@ class App extends Component {
                   token: cookies.get("token")
                 };
                 formData.append("name", FolderName);
-                formData.append("folder", FolderID);
-
+                if (FolderID) {
+                  formData.append("folder", FolderID);
+                }
                 axios({
                   url: host+`api/folder/add`,
                   method: "POST",

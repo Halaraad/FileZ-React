@@ -173,6 +173,7 @@ class Sidebar extends React.Component {
   customFormRenderer(onSubmit) {
     return (
       <form id="customForm" method="post" action={host+`api/files/add`}>
+
         <Heading size={400} marginLeft={32} marginBottom={10}>
           Select Folder
         </Heading>
@@ -185,6 +186,9 @@ class Sidebar extends React.Component {
         onConfirm={()=>{
           setState({ isShown: false })
           this.componentDidMount()
+          this.setState({
+            FoldersPath:[]
+          })
         }}
         title="Select Folder"
         onCloseComplete={() => setState({ isShown: false })}
@@ -243,12 +247,15 @@ class Sidebar extends React.Component {
                                 </div>
                               ))}
         </div>
+     
       </Dialog>
 
-      <a  onClick={() => setState({ isShown: true })}>Show Dialog</a>
+      <a className="browseFolders" onClick={() => setState({ isShown: true })}>Browse Folders</a>
     </Pane>
   )}
 </Component>
+     
+     
         <input type="hidden" name="token" value={cookies.get("token")} />
         <input type="hidden" name="public" value={1} />
         
@@ -325,7 +332,9 @@ class Sidebar extends React.Component {
 
                       <Menu.Item
                         className=""
-                        onClick={() => setState({ isShown: true })}>
+                        onClick={() => { 
+                          this.setState({Folders:ctx.value.Folders})
+                          setState({ isShown: true })}}>
                         <Button height={48}>Add File</Button>
                       </Menu.Item>
                     </Pane>
@@ -368,7 +377,7 @@ class Sidebar extends React.Component {
                     <Pane marginTop={0} className="pane-container">
                       <Dialog isShown={state.isShown}
                         onConfirm={() => {
-                          ctx.actions.AddNewFolder(FolderName);
+                          ctx.actions.AddNewFolder(FolderName,'');
                           setState({ isShown: false });
                         }}
                         title="Add New Folder"

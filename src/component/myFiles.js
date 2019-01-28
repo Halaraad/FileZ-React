@@ -13,6 +13,7 @@ const cookies = new Cookies();
 var FolderID='';
 var RadioValue='';
 var FolderName;
+var fid;
 var host="http://localhost:5000/"
 var SelectFolderOnUpload;
 
@@ -80,12 +81,54 @@ class MyFiles extends React.Component {
       Files: [],
       Folders: [],
       FoldersPath: [],
+      FoldersPath2: [],
       FileNames: "",
     };
   }
 
   changeActiveItem = activeItemIndex => this.setState({ activeItemIndex });
 
+  componentDidMount(value) {
+    if (value) {
+      fetch(host+`api/folder/folder/`+value, {
+        credentials: "same-origin",
+        headers: {
+          token: cookies.get("token")
+        }
+      })
+        .then(response => {
+          if (response.status == 200) {
+            return response.json();
+          }
+        })
+        .then(data => {
+          if (data) {
+            this.setState({
+              Folders: data[0].Folder
+            });
+          }
+        });
+    } else {    
+    fetch(host+`api/folder/`, {
+      credentials: "same-origin",
+      headers: {
+        token: cookies.get("token")
+      }
+    })
+      .then(response => {
+        if (response.status == 200) {
+          return response.json();
+        }
+      })
+      .then(data => {
+        if (data) {
+          this.setState({
+            Folders: data
+          });
+        }
+      });
+    }
+  }
   render() {
     return (
       <div>
@@ -263,6 +306,9 @@ class MyFiles extends React.Component {
                          this.setState({
                          FoldersPath:[]
                          })
+                                                                                 document.getElementById('deleteFolder').style.display="none" 
+                                                        document.getElementById('undoFolder').style.display="none" 
+                                                        document.getElementById('AddFolder').style.display="none" 
                       }}> <Icon icon="home" color="success" /> Home</a></li>
                       {this.state.FoldersPath.map((Folder,i) => (
                             <li><a href="#" onClick={()=>{
@@ -395,7 +441,11 @@ class MyFiles extends React.Component {
 
                             <IconButton icon="delete" id="deleteFolder" intent="success" height={40}
                               onClick={() => {
-                                ctx.actions.DeleteFodler(FolderID) }}/> 
+                                ctx.actions.DeleteFodler(FolderID) 
+                                this.setState({
+                                  FoldersPath:[]
+                                  })
+                                }}/> 
                 <Component initialState={{ isShown: false }}>
                   {({ state, setState }) => (
                     <Pane marginTop={0} className="pane-container">
@@ -513,7 +563,11 @@ class MyFiles extends React.Component {
                                         <Pane>
                                           <Dialog isShown={state.isShown} title="Move File To Folder"
                                             onConfirm={() => {
-                                              ctx.actions.MoveFileTOFolder(file._id, SelectFolderOnUpload);
+                                              ctx.actions.MoveFileTOFolder(file._id, fid);
+                                              this.componentDidMount()
+                                              this.setState({
+                                              FoldersPath2:[]
+                                              })
                                               setState({ isShown: false });
                                             }}
                                             onCloseComplete={() =>
@@ -521,30 +575,70 @@ class MyFiles extends React.Component {
                                             }
                                             confirmLabel="Move">
 
-                                            <Heading size={400} marginLeft={32} marginBottom={10}>
-                                              Select Folder
-                                            </Heading>
+                                <ul className="breadcrumb">
+                                      <li><a onClick={()=>{
+                                                        this.componentDidMount()
+                                                        this.setState({
+                                                        FoldersPath2:[]
+                                                        })
+                                                        FolderID=""
 
-                                            <Select
-                                              onChange={event => {
-                                                SelectFolderOnUpload = event.target.value;
-                                              }}
-                                              width="90%" marginBottom={10} marginLeft={32}>
-                                              <option checked>Select Folder</option>
-                                              <option value="Main_Folder">Main Folder</option>
-
-                                              {ctx.value.Folders.map(
-                                                (Folder, i) => (
-                                                  <option key={Folder._id} value={Folder._id}>
-                                                    {Folder.name}
-                                                  </option>
-                                                )
-                                              )}
-                                            </Select>
+                                                      }}>Home</a></li>
+                                                      {this.state.FoldersPath2.map((Folder,i) => (
+                                                            <li><a href="#" onClick={()=>{
+                                                              this.componentDidMount(Folder._id)
+                                                              var l=this.state.FoldersPath2.length
+                                                              var x=this.state.FoldersPath2
+                                                              x.length = i+1;
+                                                            }}>{Folder.name}</a></li>
+                                                              ))}
+                                                    </ul>
+                                      <div className="FoldersModel">
+                                      <div >
+                                    <div >
+                                        <img
+                                      onClick={evnt => {
+                                      fid="Main Folder"
+                                      this.setState({
+                                        Folders:[]
+                                      })
+                                      }}
+               width="50" height="50" alt="" src="/assets/images/mainFolder.png"/>
+                                  </div>
+                                  <div>
+                                    <span id="folder-name">Main Folder</span>
+                                  </div>
+                                </div>
+      
+      {this.state.Folders.map(Folder => (
+                                <div key={Folder._id}>
+                                  <div >
+                                    <img
+                                      onClick={evnt => {
+                                        fid=Folder._id
+                                        this.componentDidMount(Folder._id)
+                                        let Folders = [...this.state.FoldersPath2, Folder];
+                                        this.setState({
+                                          FoldersPath2:Folders
+                                        })
+                                      }}
+                                      id={Folder._id} width="50" height="50" alt="" src="/assets/images/mainFolder.png"/>
+                                  </div>
+                                  <div>
+                                    <span id="folder-name">{Folder.name}</span>
+                                  </div>
+                                </div>
+                              ))}
+                                </div>
+     
                                           </Dialog>
                                           <IconButton className="addtofolder-border" icon="add-to-folder"
-                                            onClick={() =>
-                                              setState({ isShown: true })
+                                            onClick={() =>{  
+                                              
+                                            this.setState({Folders:ctx.value.Folders})
+                                            
+                                            setState({ isShown: true })
+                                          }
                                             }/>
                                         </Pane>
                                       )}
