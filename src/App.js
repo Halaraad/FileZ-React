@@ -59,17 +59,8 @@ class App extends Component {
         // If request is good...
         if (response.data[1]) {
           //calculate limit for
-          let packageSize;
+          let packageSize=response.data[1].sesson.packageSize;
           var limit = response.data[1].sesson.limit;
-          if (response.data[1].sesson.package == "free") {
-            packageSize = 100000000;
-          } else if (response.data[1].sesson.package == "economic") {
-            packageSize = 1000000000;
-          } else if (response.data[1].sesson.package == "standard") {
-            packageSize = 10000000000;
-          } else if (response.data[1].sesson.package == "business") {
-            packageSize = 100000000000;
-          }
           var free = packageSize - limit;
           var rate = free / packageSize;
           var packagefree = rate * 100;
@@ -292,17 +283,8 @@ class App extends Component {
       userLimitChangeIO(userLimitChange);
     });
     const userLimitChangeIO = userLimitChange => {
-      let packageSize;
+      let packageSize=userLimitChange.packageSize;
       var limit = userLimitChange.limit;
-      if (userLimitChange.package == "free") {
-        packageSize = 100000000;
-      } else if (userLimitChange.package == "economic") {
-        packageSize = 1000000000;
-      } else if (userLimitChange.package == "standard") {
-        packageSize = 10000000000;
-      } else if (userLimitChange.package == "business") {
-        packageSize = 100000000000;
-      }
       var free = packageSize - limit;
       var rate = free / packageSize;
       var packagefree = rate * 100;
@@ -402,7 +384,7 @@ class App extends Component {
                   .then(response => {
                     if (response.status == 200) {
                       toaster.success(
-                        "Folder has been Move To Trash Successfully"
+                        "File has been moved to trash successfully"
                       );
                       if (FolderIdCheck) {
                         this.NetworkRequests(FolderIdCheck);
@@ -432,7 +414,7 @@ class App extends Component {
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("file has been  moved Successfully");
+                      toaster.success("File has been moved Successfully");
                       if (FolderIdCheck) {
                         this.NetworkRequests(FolderIdCheck);
                       } else {
@@ -568,15 +550,16 @@ class App extends Component {
               ReCallcomponentDidMount: value => {
                 this.componentDidMount();
               },
-              UpgradedPackage: value => {
+              UpgradedPackage: (token,Package) => {
+
                 let formData = new FormData();
                 var headers = {
                   "Content-Type": "application/json",
                   token: cookies.get("token")
                 };
 
-                formData.append("package", value);
-
+                formData.append("stripeToken", token.id);
+                formData.append("package", Package);
                 axios({
                   url: host+`api/user/updatePackage/`,
                   method: "POST",
@@ -607,7 +590,7 @@ class App extends Component {
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("Folder has been  Delete Successfully");
+                      toaster.success("Folder has been Deleted successfully");
                       document.getElementById("deleteFolder").style.display =
                         "none";
                       document.getElementById("undoFolder").style.display =
@@ -679,7 +662,7 @@ class App extends Component {
                     } else if (error.response.data.details[0].message) {
                       toaster.danger(error.response.data.details[0].message);
                     } else {
-                      toaster.danger("Sorry you are not A Admin");
+                      toaster.danger("Sorry you are not an admin");
                     }
                     console.log(error);
                   });
@@ -697,7 +680,7 @@ class App extends Component {
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("User has been Delete Successfully");
+                      toaster.success("User has been Deleted successfully");
                       this.componentDidMount();
                     }
                   })
@@ -722,7 +705,7 @@ class App extends Component {
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("Your profile update successfully");
+                      toaster.success("Your profile has been updated successfully");
                       this.componentDidMount();
                     }
                   })
@@ -745,7 +728,7 @@ class App extends Component {
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("file has been Recovery Successfully");
+                      toaster.success("File has been recovered successfully");
                       this.NetworkRequests();
                     }
                   })
@@ -766,7 +749,7 @@ class App extends Component {
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("file has been Delete Successfully");
+                      toaster.success("File has been deleted successfully");
                       this.componentDidMount();
                     }
                   })
