@@ -24,8 +24,12 @@ $ npm i
 $ npm start
 ```
 Admin Account
+```
 Email:admin@admin
+```
+```
 Password:123456
+```
 
 [Live Demo](https://file-z-v2.herokuapp.com)
 
