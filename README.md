@@ -1,13 +1,3 @@
-# FileZ-Client
-
-### first 
-```
-npm i 
-```
-### then
-```
-npm start
-```
 
 # FileZ-Client
 ## Features
@@ -28,11 +18,11 @@ npm start
 ## Installation
 ```
 $ npm i 
-``
-Start !
+```
+## Start !
 ```
 $ npm start
-``
+```
 Admin Account
 Email:admin@admin
 Password:123456
