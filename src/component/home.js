@@ -42,10 +42,10 @@ class Home extends Component {
                 Store up to <span className="bold">100</span> MegaBytes of free storage.
                 </p>
                 <div>
-                  <span class="package-choose b">Current Package</span>
+                  <span class="package-choose b">Sign Up</span>
                 </div>
               </div>
-              <div class="package border-g">
+              <div class="package border-b">
                 <div class="package-header">
                   <h2>Economic Package</h2>
                   <h2><img src="/assets/images/paid.png" /> $3.50</h2>
@@ -54,10 +54,10 @@ class Home extends Component {
                   Store up to <span className="bold">1</span> GigaBytes of storage.
                 </p>
                 <div>
-                  <span class="package-choose g">Up Coming</span>
+                  <span class="package-choose b">Sign Up & Upgrade</span>
                 </div>
               </div>
-              <div class="package border-g">
+              <div class="package border-b">
                 <div class="package-header">
                   <h2>Standard Package</h2>
                   <h2><img src="/assets/images/paid.png" /> $7.00</h2>
@@ -66,10 +66,10 @@ class Home extends Component {
                 Store up to <span className="bold">10</span> GigaBytes of storage.
                 </p>
                 <div>
-                  <span class="package-choose g">Up Coming</span>
+                  <span class="package-choose b">Sign Up & Upgrade</span>
                 </div>
               </div>
-              <div class="package border-g">
+              <div class="package border-b">
                 <div class="package-header">
                   <h2>Business Package</h2>
                   <h2><img src="/assets/images/paid.png" /> $12.00</h2>
@@ -78,7 +78,7 @@ class Home extends Component {
                 Store up to <span className="bold">100</span> GigaBytes of storage.
                 </p>
                 <div>
-                  <span class="package-choose g">Up Coming</span>
+                  <span class="package-choose b">Sign Up & Upgrade</span>
                 </div>
               </div>
             </div>

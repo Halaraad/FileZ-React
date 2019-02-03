@@ -18,8 +18,7 @@ import FolderIcon from "./assets/images/folder.png";
 
 var host="http://localhost:5000/"
 var FolderIdCheck;
-var iconbuffer;
-var MyFilesCheck;
+
 
 const cookies = new Cookies();
 
@@ -210,12 +209,7 @@ class App extends Component {
       });
   }
 
-  changeFoldericon() {
-    if (document.getElementById("Openfolder")) {
-      document.getElementById("Openfolder").src = `${FolderIcon}`;
-      document.getElementById("Openfolder").id = iconbuffer;
-    }
-  }
+
 
   SocketData() {
     var io = openSocket.connect(
@@ -328,7 +322,8 @@ class App extends Component {
       }, []);
       this.setState({
         Files: Files.filter(Files => Files._id !== data._id),
-        TrashFiles: uniqueTrashFiles
+        TrashFiles: uniqueTrashFiles,
+        FilesInTrash:this.state.FilesInTrash+1
       });
     });
 
@@ -349,7 +344,8 @@ class App extends Component {
       }, []);
       this.setState({
         TrashFiles: TrashFiles.filter(Files => Files._id !== data._id),
-        Files: uniqueFiles
+        Files: uniqueFiles,
+        FilesInTrash:this.state.FilesInTrash-1
       });
     });
     io.on("DeletedFile", data => {
@@ -357,7 +353,8 @@ class App extends Component {
       this.setState({
         TrashFiles: TrashFiles.filter(Files => Files._id !== data._id),
         FilesNumber: this.state.FilesNumber - 1,
-        FilesSizeInfo: this.state.FilesSizeInfo - data.size
+        FilesSizeInfo: this.state.FilesSizeInfo - data.size,
+        FilesInTrash:this.state.FilesInTrash-1
       });
     });
   }
@@ -428,19 +425,11 @@ class App extends Component {
                   });
               },
               OpenFolder: value => {
-                // this.changeFoldericon();
-                // document.getElementById(`${value}`).src = `${Openfolder}`;
-                // document.getElementById(`${value}`).id = "Openfolder";
-                // iconbuffer = value;
                 FolderIdCheck = value;
                 this.NetworkRequests(FolderIdCheck);
               },
               CloseFolder: value => {
-                if (document.getElementById("Openfolder")) {
-                  document.getElementById("Openfolder").src = `${FolderIcon}`;
-                  document.getElementById("Openfolder").id = iconbuffer;
-                }
-                iconbuffer = "";
+
                 FolderIdCheck = "";
                 this.NetworkRequests(FolderIdCheck);
               },

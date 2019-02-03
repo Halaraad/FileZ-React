@@ -143,7 +143,7 @@ class Admin extends React.Component {
 
                                   <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} />
 
-                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
+                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
                                     <Component initialState={{ isShown: false }}>
                                       {({ state, setState }) => (
                                         <Pane>

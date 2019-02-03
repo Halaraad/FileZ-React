@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Button, Pane, Badge,Dialog, toaster, IconButton, FilePicker, Heading, Select, Switch, TextInput } from "evergreen-ui";
+import { Menu, Button, Pane, Badge, Dialog, toaster, IconButton, FilePicker, Heading, Select, Switch, TextInput } from "evergreen-ui";
 import { NavLink } from "react-router-dom";
 import { Col, ProgressBar } from "react-bootstrap";
 import Component from "@reactions/component";
@@ -82,7 +82,6 @@ class Sidebar extends React.Component {
               Folders: data[0].Folder
             });
           }
-          this.AddSubFolder();
         });
     } else {
       fetch(host + `api/folder/`, {
@@ -106,16 +105,6 @@ class Sidebar extends React.Component {
     }
   }
 
-  AddSubFolder() {
-    if (this.state.SubFolders) {
-      for (let index = 0; index < this.state.SubFolders.length; index++) {
-        var div = document.createElement("div");
-        div.id = "rowTest";
-        div.innerHTML = `<input type="radio" name="folder"" value="${this.state.SubFolders[index]._id}">${this.state.SubFolders[index].name}<br>`;
-        document.getElementById("content").appendChild(div);
-      }
-    }
-  }
 
   formGetter() {
     return new FormData(document.getElementById("customForm"));
@@ -258,7 +247,7 @@ class Sidebar extends React.Component {
           Choose File
         </Heading>
 
-        <FilePicker marginLeft={32} width="90%" marginBottom={10}
+        <FilePicker marginLeft={32}  width="90%" marginBottom={10} id="FilePicker"
           onChange={files => console.log(files)}
           display="none;" name="file" />
         <Heading size={400} marginLeft={32} marginBottom={10} marginTop="default">
@@ -291,6 +280,7 @@ class Sidebar extends React.Component {
                       <Pane>
                         <Dialog isShown={state.isShown}
                           onConfirm={() => {}}
+                          
                           title="Upload New File" hasFooter={false}
                           onCloseComplete={() => {
                             setState({ isShown: false });
@@ -335,7 +325,7 @@ class Sidebar extends React.Component {
 
                         <Menu.Item className=""
                           onClick={() => {
-                            this.setState({ Folders: ctx.value.Folders });
+                            this.componentDidMount()
                             setState({ isShown: true });
                           }}>
                           <Button height={48}>Add File</Button>
@@ -361,9 +351,12 @@ class Sidebar extends React.Component {
                 <div className="links-container">
                   <NavLink activeClassName="active-bin" className="link-container" to="/Trash">
                     <img src="/assets/images/white22.png" alt="" />
-                    <a href="#2">Trash<Badge
-                     style={ctx.value.FilesInTrash? {}: { display: "none" }
-                     } marginLeft={10} color="red" isSolid>{ctx.value.FilesInTrash}</Badge></a>
+                    <a href="#2">Trash
+                      <Badge className="trash-badge" marginLeft={35} isSolid
+                        style={ctx.value.FilesInTrash? {}: { display: "none" }}>
+                        <span>{ctx.value.FilesInTrash}</span>
+                      </Badge>
+                     </a>
                   </NavLink>
                 </div>
 
@@ -522,9 +515,7 @@ class Sidebar extends React.Component {
                   <div className="storage-para">
                     <p id="storage-para-p">
                       {(
-                        ctx.value.PackageSize / 1000000 -
-                        ctx.value.Session.limit / 1000000
-                      ).toFixed(2)}{" "}
+                        ctx.value.PackageSize / 1000000 - ctx.value.Session.limit / 1000000).toFixed(2)}{" "}
                       MB of {ctx.value.PackageSize / 1000000} MB used.
                     </p>
                   </div>
