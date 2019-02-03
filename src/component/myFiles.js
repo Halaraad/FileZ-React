@@ -173,13 +173,13 @@ class MyFiles extends React.Component {
       <Dialog
         isShown={state.isShown}
         title="Upgrade Storage "
-        width={700}
+        width={880}
         hasFooter={false}
         onCloseComplete={() => setState({ isShown: false })}
         confirmLabel="Custom Label"
       >
-            <div class="packages-container-chooseplan">
-              <div class="package-chooseplan border-b">
+            <div class="user-packages-container-chooseplan">
+              {/* <div class="package-chooseplan border-b">
                 <div class="package-chooseplan-header">
                   <h2>Free Package</h2>
                   <h2><img src="/assets/images/free.png" /> $0.00</h2>
@@ -194,13 +194,13 @@ class MyFiles extends React.Component {
                
                 <Button appearance="primary" height={35} iconBefore="confirm" disabled>Selected</Button>
                 </div>
-              </div>
-              <div class="package-chooseplan border-g">
-                <div class="package-chooseplan-header">
+              </div> */}
+              <div class="user-package-chooseplan border-b">
+                <div class="user-package-chooseplan-header">
                   <h2>Economic Package</h2>
                   <h2><img src="/assets/images/paid.png" /> $3.50</h2>
                 </div>
-                <p class="package-chooseplan-p">
+                <p class="user-package-chooseplan-p">
                   Add <span className="bold">1</span> GigaBytes of storage.
                 </p>
                 <div>
@@ -213,12 +213,12 @@ class MyFiles extends React.Component {
               name="" />
                 </div>
               </div>
-              <div class="package-chooseplan border-g">
-                <div class="package-chooseplan-header">
+              <div class="user-package-chooseplan border-b">
+                <div class="user-package-chooseplan-header">
                   <h2>Standard Package</h2>
                   <h2><img src="/assets/images/paid.png" /> $7.00</h2>
                 </div>
-                <p class="package-chooseplan-p">
+                <p class="user-package-chooseplan-p">
                 Add <span className="bold">10</span> GigaBytes of storage.
                 </p>
                 <div>
@@ -231,12 +231,12 @@ class MyFiles extends React.Component {
               name="" />
                 </div>
               </div>
-              <div class="package-chooseplan border-g">
-                <div class="package-chooseplan-header">
+              <div class="user-package-chooseplan border-b">
+                <div class="user-package-chooseplan-header">
                   <h2>Business Package</h2>
                   <h2><img src="/assets/images/paid.png" /> $12.00</h2>
                 </div>
-                <p class="package-chooseplan-p">
+                <p class="user-package-chooseplan-p">
                 Add <span className="bold">100</span> GigaBytes of storage.
                 </p>
                 <div>
@@ -252,13 +252,11 @@ class MyFiles extends React.Component {
             </div>
       </Dialog>
 
-      <Button marginRight={16} width={120} height={30} appearance="minimal" iconBefore="trending-up"
-                                      onClick={() =>
-                                        setState({ isShown: true })
-                                      }>
-
-                        More Storge
-                                    </Button>
+      <Button marginRight={16} width={200} height={30} appearance="minimal" iconBefore="trending-up"
+          onClick={() =>
+            setState({ isShown: true })}>
+        More Storage
+      </Button>
     </Pane>
   )}
 </Component>
@@ -604,14 +602,14 @@ class MyFiles extends React.Component {
                                       <span className="table-body-row-span">{(file.size / 1000000).toFixed(3)} MB</span>
                                     </Table.TextCell>
 
-                                    <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
-                                      <IconButton className="download-border" icon="import" intent="success"
+                                    <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
+                                      <IconButton className="download-border" icon="import" intent="success" height={35}
                                         onClick={() => {
                                           window.open(host + file.FilePath, "_blank");
                                         }} />
                                     </Table.TextCell>
 
-                                    <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
+                                    <Table.TextCell className="textcell-padding" flexBasis={55} flexShrink={0} flexGrow={0}>
                                       <Component initialState={{ isShown: false }}>
                                         {({ state, setState }) => (
                                           <Pane>
@@ -698,11 +696,9 @@ class MyFiles extends React.Component {
                                                 )}
                                               </div>
                                             </Dialog>
-                                            <IconButton className="addtofolder-border" icon="add-to-folder"
+                                            <IconButton className="addtofolder-border" icon="add-to-folder" height={35}
                                               onClick={() => {
-                                                this.setState({
-                                                  Folders: ctx.value.Folders
-                                                });
+                                                this.componentDidMount()
                                                 setState({ isShown: true });
                                               }} />
                                           </Pane>
@@ -710,8 +706,8 @@ class MyFiles extends React.Component {
                                       </Component>
                                     </Table.TextCell>
 
-                                    <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
-                                      <IconButton className="trash-border"
+                                    <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
+                                      <IconButton className="trash-border" height={35}
                                         onClick={() => {
                                           ctx.actions.MoveFileTOTrash(file._id);
                                         }}
