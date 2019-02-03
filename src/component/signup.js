@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { toaster,Pane } from "evergreen-ui";
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -7,6 +6,7 @@ import Context from "./context.js";
 import MyFiles from "./myFiles";
 const cookies = new Cookies();
 
+var host="http://localhost:5000/"
 class SignUp extends React.Component {
   constructor() {
     super();
@@ -25,7 +25,7 @@ class SignUp extends React.Component {
 
   Register(event) {
     event.preventDefault();
-    axios.post("https://filez-node-v2.herokuapp.com/api/user/register", {
+    axios.post(host+`api/user/register`, {
         email: this.state.Email,
         password: this.state.Password,
         name: this.state.Name

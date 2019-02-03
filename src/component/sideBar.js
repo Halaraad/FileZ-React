@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Button, Pane, Dialog, toaster, IconButton, FilePicker, Heading, Select, Switch, TextInput } from "evergreen-ui";
+import { Menu, Button, Pane, Badge, Dialog, toaster, IconButton, FilePicker, Heading, Select, Switch, TextInput } from "evergreen-ui";
 import { NavLink } from "react-router-dom";
 import { Col, ProgressBar } from "react-bootstrap";
 import Component from "@reactions/component";
@@ -7,7 +7,8 @@ import FileUploadProgress from "react-fileupload-progress";
 import Cookies from "universal-cookie";
 
 import Context from "./context.js";
-
+var host="http://localhost:5000/"
+var fid
 const cookies = new Cookies();
 
 var UploadCheck = 0;
@@ -16,6 +17,7 @@ var AdminName = "";
 var AdminEmail = "";
 var FolderName = "";
 var ProfilePicture;
+var Folder_id
 var UserName = "";
 
 const styles = {
@@ -52,30 +54,57 @@ class Sidebar extends React.Component {
   constructor() {
     super();
     this.state = {
-      Folders: ""
+      Folders: [],
+      SubFolders: [],
+      FoldersPath: []
     };
   }
 
-  componentDidMount() {
-    fetch(`https://filez-node-v2.herokuapp.com/api/folder/`, {
-      credentials: "same-origin",
-      headers: {
-        token: cookies.get("token")
-      }
-    })
-      .then(response => {
-        if (response.status == 200) {
-          return response.json();
+  componentDidMount(value) {
+    if (document.getElementById("rowTest")) {
+      document.getElementById("rowTest").remove();
+    }
+    if (value) {
+      fetch(host + `api/folder/folder/` + value, {
+        credentials: "same-origin",
+        headers: {
+          token: cookies.get("token")
         }
       })
-      .then(data => {
-        if (data) {
-          this.setState({
-            Folders: data
-          });
+        .then(response => {
+          if (response.status == 200) {
+            return response.json();
+          }
+        })
+        .then(data => {
+          if (data) {
+            this.setState({
+              Folders: data[0].Folder
+            });
+          }
+        });
+    } else {
+      fetch(host + `api/folder/`, {
+        credentials: "same-origin",
+        headers: {
+          token: cookies.get("token")
         }
-      });
+      })
+        .then(response => {
+          if (response.status == 200) {
+            return response.json();
+          }
+        })
+        .then(data => {
+          if (data) {
+            this.setState({
+              Folders: data
+            });
+          }
+        });
+    }
   }
+
 
   formGetter() {
     return new FormData(document.getElementById("customForm"));
@@ -102,8 +131,7 @@ class Sidebar extends React.Component {
         );
       }
 
-      if (progress === 100) {
-      }
+      if (progress === 100) { }
 
       return (
         <div>
@@ -121,33 +149,113 @@ class Sidebar extends React.Component {
 
   customFormRenderer(onSubmit) {
     return (
-      <form id="customForm" method="post" action="https://filez-node-v2.herokuapp.com/api/files/add">
+      <form id="customForm" method="post" action={host + `api/files/add`}>
         <Heading size={400} marginLeft={32} marginBottom={10}>
           Select Folder
         </Heading>
+        <input name="folder" type="hidden" value={fid} />
+        <Component initialState={{ isShown: false }}>
+          {({ state, setState }) => (
+            <Pane>
+              <Dialog isShown={state.isShown}
+                onConfirm={() => {
+                  setState({ isShown: false });
+                  this.componentDidMount();
+                  this.setState({
+                    FoldersPath: []
+                  });
+                }}
+                title="Select Folder" onCloseComplete={() => setState({ isShown: false })} confirmLabel="Select">
+                <ul className="breadcrumb breadcrumb-margin">
+                  <li>
+                    <a
+                      onClick={() => {
+                        this.componentDidMount();
+                        this.setState({
+                          FoldersPath: []
+                        });
+                      }}>
+                      Home
+                    </a>
+                  </li>
+                  {this.state.FoldersPath.map((Folder, i) => (
+                    <li>
+                      <a href="#"
+                        onClick={() => {
+                          this.componentDidMount(Folder._id);
+                          var l = this.state.FoldersPath.length;
+                          var x = this.state.FoldersPath;
+                          x.length = i + 1;
+                        }}>
+                        {Folder.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <div className="FoldersModel">
+                  <div>
+                    <div>
+                      <img
+                        onClick={evnt => {
+                          fid = "Main Folder";
+                          this.setState({
+                            Folders: []
+                          });
+                        }}
+                        width="40" height="40" alt="" src="/assets/images/mainFolder.png" />
+                    </div>
+                    <div>
+                      <span id="folder-name-small">Main Folder</span>
+                    </div>
+                  </div>
 
-        <Select name="folder" width="90%" marginBottom={10} marginLeft={32}>
-          <option checked>Main Folder</option>
-          {this.state.Folders.map((Folder, i) => (
-            <option key={Folder._id} value={Folder._id}>
-              {Folder.name}
-            </option>
-          ))}
-        </Select>
+                  {this.state.Folders.map(Folder => (
+                    <div key={Folder._id}>
+                      <div>
+                        <img
+                          onClick={evnt => {
+                            fid = Folder._id;
+                            this.componentDidMount(Folder._id);
+                            let Folders = [...this.state.FoldersPath, Folder];
+                            this.setState({
+                              FoldersPath: Folders
+                            });
+                          }}
+                          id={Folder._id} width="40" height="40" alt="" src="/assets/images/mainFolder.png" />
+                      </div>
+                      <div>
+                        <span id="folder-name-small">{Folder.name}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Dialog>
+
+              <a
+                className="browseFolders"
+                onClick={() => setState({ isShown: true })}>
+                Browse Folders
+              </a>
+            </Pane>
+          )}
+        </Component>
+
         <input type="hidden" name="token" value={cookies.get("token")} />
         <input type="hidden" name="public" value={1} />
-        
+
         <Heading size={400} marginLeft={32} width="90%" marginBottom={10} marginTop="default">
           Choose File
         </Heading>
 
-        <FilePicker marginLeft={32} width="90%" marginBottom={10} onChange={files => console.log(files)} display="none;" name="file" />
+        <FilePicker marginLeft={32}  width="90%" marginBottom={10} id="FilePicker"
+          onChange={files => console.log(files)}
+          display="none;" name="file" />
         <Heading size={400} marginLeft={32} marginBottom={10} marginTop="default">
           Private ?
         </Heading>
 
-        <Switch marginLeft={32} name="public" value={1} marginBottom={10} disabled/>
-        <Button appearance="primary" marginLeft={200} onClick={onSubmit}>
+        <Switch marginLeft={32} name="public" value={1} marginBottom={10} disabled />
+        <Button appearance="primary" marginLeft={210} onClick={onSubmit}>
           Upload File
         </Button>
       </form>
@@ -168,54 +276,63 @@ class Sidebar extends React.Component {
 
                 <div className="add-file-div">
                   <Component initialState={{ isShown: false }}>
-                  {({ state, setState }) => (
-                    <Pane>
-                      <Dialog isShown={state.isShown}
-                        onConfirm={() => {}}
-                        title="Upload New File" hasFooter={false}
-                        onCloseComplete={() => {
-                          setState({ isShown: false });
-                        }}
-                        confirmLabel="Upload File">
+                    {({ state, setState }) => (
+                      <Pane>
+                        <Dialog isShown={state.isShown}
+                          onConfirm={() => {}}
+                          
+                          title="Upload New File" hasFooter={false}
+                          onCloseComplete={() => {
+                            setState({ isShown: false });
+                          }}
+                          confirmLabel="Upload File">
+                          <FileUploadProgress
+                            key="ex2" url={host + `api/files/add`}
+                            onProgress={(e, request, progress) => {
+                              UploadCheck = progress;
+                              console.log(UploadCheck);
+                              if (progress == 100) {
+                                console.log("progress", e, request, progress);
+                              }
+                            }}
+                            onLoad={(e, request) => {
+                              if (e.currentTarget.response) {
+                                toaster.success(e.currentTarget.response);
+                                ctx.actions.ReCallcomponentDidMount();
+                              }
+                              console.log("load", e.currentTarget.response);
+                            }}
+                            onError={(e, request) => {
+                              if (e.currentTarget.response) {
+                                toaster.danger(e.currentTarget.response);
+                              }
+                              console.log(
+                                "error",
+                                e.currentTarget.response,
+                                request
+                              );
+                            }}
+                            onAbort={(e, request) => {
+                              console.log("abort", e, request);
+                            }}
+                            formGetter={this.formGetter.bind(this)}
+                            formRenderer={this.customFormRenderer.bind(this)}
+                            progressRenderer={this.customProgressRenderer.bind(
+                              this
+                            )}
+                          />
+                        </Dialog>
 
-                        <FileUploadProgress key="ex2" url="https://filez-node-v2.herokuapp.com/api/files/add"
-                          onProgress={(e, request, progress) => {
-                            UploadCheck = progress;
-                            console.log(UploadCheck);
-                            if (progress == 100) {
-                              console.log("progress", e, request, progress);
-                            }
-                          }}
-                          onLoad={(e, request) => {
-                            if (e.currentTarget.response) {
-                              toaster.success(e.currentTarget.response);
-                              ctx.actions.ReCallcomponentDidMount();
-                            }
-                            console.log("load", e.currentTarget.response);
-                          }}
-                          onError={(e, request) => {
-                            if (e.currentTarget.response) {
-                              toaster.danger(e.currentTarget.response);
-                            }
-                            console.log("error", e.currentTarget.response, request);
-                          }}
-                          onAbort={(e, request) => {
-                            console.log("abort", e, request);
-                          }}
-                          formGetter={this.formGetter.bind(this)}
-                          formRenderer={this.customFormRenderer.bind(this)}
-                          progressRenderer={this.customProgressRenderer.bind(this)}
-                        />
-                      </Dialog>
-
-                      <Menu.Item
-                        className=""
-                        onClick={() => setState({ isShown: true })}>
-                        <Button height={48}>Add File</Button>
-                      </Menu.Item>
-                    </Pane>
-                  )}
-                </Component>
+                        <Menu.Item className=""
+                          onClick={() => {
+                            this.componentDidMount()
+                            setState({ isShown: true });
+                          }}>
+                          <Button height={48}>Add File</Button>
+                        </Menu.Item>
+                      </Pane>
+                    )}
+                  </Component>
                 </div>
 
                 <div className="links-container">
@@ -234,15 +351,17 @@ class Sidebar extends React.Component {
                 <div className="links-container">
                   <NavLink activeClassName="active-bin" className="link-container" to="/Trash">
                     <img src="/assets/images/white22.png" alt="" />
-                    <a href="#2">Trash</a>
+                    <a href="#2">Trash
+                      <Badge className="trash-badge" marginLeft={35} isSolid
+                        style={ctx.value.FilesInTrash? {}: { display: "none" }}>
+                        <span>{ctx.value.FilesInTrash}</span>
+                      </Badge>
+                     </a>
                   </NavLink>
                 </div>
 
                 <div className="links-container"
-                  style={ctx.value.Session.role == 1 
-                  ? {} 
-                  : { display: "none" }}>
-
+                  style={ctx.value.Session.role == 1 ? {} : { display: "none" }}>
                   <NavLink className="link-container" to="/admin">
                     <img src="/assets/images/white333.png" alt="" />
                     <a href="#3">Admin</a>
@@ -253,13 +372,11 @@ class Sidebar extends React.Component {
                     <Pane marginTop={0} className="pane-container">
                       <Dialog isShown={state.isShown}
                         onConfirm={() => {
-                          ctx.actions.AddNewFolder(FolderName);
+                          ctx.actions.AddNewFolder(FolderName, "");
                           setState({ isShown: false });
                         }}
-                        title="Add New Folder"
-                        onCloseComplete={() => setState({ isShown: false })}
-                        confirmLabel="Add">
-
+                        title="Add New Folder" confirmLabel="Add"
+                        onCloseComplete={() => setState({ isShown: false })}>
                         <Heading size={400} marginLeft={32} marginBottom={10}>
                           Choose Folder Name
                         </Heading>
@@ -268,8 +385,7 @@ class Sidebar extends React.Component {
                           onChange={event => {
                             FolderName = event.target.value;
                           }}
-                          width="90%" marginLeft={32} marginBottom={10} placeholder="Folder Name..."
-                        />
+                          width="90%" marginLeft={32} marginBottom={10} placeholder="Folder Name..." />
                       </Dialog>
 
                       <Menu.Item className="pane-container-item"
@@ -287,12 +403,12 @@ class Sidebar extends React.Component {
                       <Dialog isShown={state.isShown}
                         onConfirm={() => {
                           ctx.actions.UserPorfileEdit(UserName, ProfilePicture);
-                          UserName="";
-                          ProfilePicture="";
+                          UserName = "";
+                          ProfilePicture = "";
                           setState({ isShown: false });
                         }}
-                        title="Edit Porfile" onCloseComplete={() => setState({ isShown: false })} confirmLabel="Edit">
-
+                        title="Edit Porfile" confirmLabel="Edit"
+                        onCloseComplete={() => setState({ isShown: false })}>
                         <Heading size={400} marginLeft={32} marginBottom={10}>
                           Name
                         </Heading>
@@ -310,8 +426,7 @@ class Sidebar extends React.Component {
                         <FilePicker multiple width="90%" marginLeft={32} marginBottom={10}
                           onChange={files => {
                             ProfilePicture = files[0];
-                          }}
-                        />
+                          }} />
                       </Dialog>
 
                       <Menu.Item className="pane-container-item"
@@ -323,26 +438,29 @@ class Sidebar extends React.Component {
                   )}
                 </Component>
 
-                <div style={ctx.value.Session.role == 1 ? {} : { display: "none" }}>
-
+                <div
+                  style={ctx.value.Session.role == 1 ? {} : { display: "none" }}>
                   <Component initialState={{ isShown: false }}>
                     {({ state, setState }) => (
                       <Pane marginTop={0} className="pane-container">
                         <Dialog isShown={state.isShown}
                           onConfirm={() => {
-                            ctx.actions.AddAdmin(AdminName, AdminEmail, AdminPassword);
-                            AdminName="";
-                            AdminEmail="";
-                            AdminPassword="";
+                            ctx.actions.AddAdmin(
+                              AdminName,
+                              AdminEmail,
+                              AdminPassword
+                            );
+                            AdminName = "";
+                            AdminEmail = "";
+                            AdminPassword = "";
                             setState({ isShown: false });
                           }}
                           title="Add New Admin" confirmLabel="Add"
                           onCloseComplete={() => setState({ isShown: false })}>
-
                           <Heading size={400} marginLeft={32} marginBottom={10}>
                             Name
                           </Heading>
-                          
+
                           <TextInput
                             onChange={event => {
                               AdminName = event.target.value;
@@ -371,7 +489,8 @@ class Sidebar extends React.Component {
                         </Dialog>
 
                         <Menu.Item className="pane-container-item"
-                          style={ ctx.value.Session.role == 1
+                          style={
+                            ctx.value.Session.role == 1
                               ? {}
                               : { display: "none" }
                           }
@@ -394,7 +513,11 @@ class Sidebar extends React.Component {
                     <ProgressBar now={ctx.value.Packagefree} />
                   </div>
                   <div className="storage-para">
-                    <p id="storage-para-p">{((ctx.value.PackageSize / 1000000)-ctx.value.Session.limit / 1000000).toFixed(2)} MB of {ctx.value.PackageSize / 1000000} MB used.</p>
+                    <p id="storage-para-p">
+                      {(
+                        ctx.value.PackageSize / 1000000 - ctx.value.Session.limit / 1000000).toFixed(2)}{" "}
+                      MB of {ctx.value.PackageSize / 1000000} MB used.
+                    </p>
                   </div>
                 </div>
               </div>

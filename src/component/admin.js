@@ -5,8 +5,9 @@ import Cookies from "universal-cookie";
 import Component from "@reactions/component";
 import MyFiles from "./myFiles";
 import Context from "./context.js";
-import Sidebar from "./sidebar";
+import Sidebar from "./sideBar";
 import Signin from "./signin";
+var host="http://localhost:5000/"
 
 const cookies = new Cookies();
 
@@ -84,7 +85,7 @@ class Admin extends React.Component {
                                 <Table.Row className="table-body-row" height={60} key={user._id}>
 
                                   <Table.TextCell flexBasis={80} flexShrink={0} flexGrow={0}>
-                                    <img id="table-files-icon" src={ `https://filez-node-v2.herokuapp.com/` + user.porfileImg } alt="img"
+                                    <img id="table-files-icon" src={ host + user.porfileImg } alt="img"
                                       style={ user.porfileImg != "defaultUser.png"
                                           ? {}
                                           : { display: "none" }
@@ -142,7 +143,7 @@ class Admin extends React.Component {
 
                                   <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} />
 
-                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
+                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
                                     <Component initialState={{ isShown: false }}>
                                       {({ state, setState }) => (
                                         <Pane>

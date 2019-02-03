@@ -1,24 +1,21 @@
-a:link, a:visited, a:hover, a:active {
+a:link, a:visited a:hover a:active {
   /* Essentially means a[href], or that the link actually goes somewhere */
   color: #7e87a1;
-  text-decoration: none!important;
+  text-decoration: none !important;
   cursor: pointer;
 }
-
 .active {
   background-image: url("/assets/images/i5.png");
   background-repeat: no-repeat;
   background-size: 8px 45px;
   background-position-y: 2px;
 }
-
 .active-bin {
   background-image: url("/assets/images/i2.png");
   background-repeat: no-repeat;
   background-size: 8px 45px;
   background-position-y: 2px;
 }
-
 .sidebar-container {
   background: #ffffff;
   display: flex;
@@ -27,31 +24,27 @@ a:link, a:visited, a:hover, a:active {
   align-items: center;
   height: 100%;
   width: 265px;
+  /* background: #3A0087; */
 }
-
 .logo {
   margin-bottom: 40px;
   text-align: center;
   margin-top: 50px;
 }
-
 .logo img {
   width: 100px;
   height: auto;
   -webkit-filter: drop-shadow(0px 2px 5px rgba(126, 135, 161, 0.5));
   filter: drop-shadow(0px 2px 5px rgba(126, 135, 161, 0.5));
 }
-
 .logo p {
   font-size: 25px;
   font-weight: 500;
   color: #7e87a1;
 }
-
 .add-file-div {
   margin-bottom: 40px;
 }
-
 .add-file-div button {
   box-shadow: 0px 2px 6px rgba(51, 51, 51, 0.25);
   border-radius: 100px;
@@ -63,17 +56,14 @@ a:link, a:visited, a:hover, a:active {
   background-position-x: 15px;
   background-position-y: 11.5px;
 }
-
 .add-file-div button:hover {
   box-shadow: 0px 2px 6px rgba(51, 51, 51, 0.5);
 }
-
 .links-container {
   height: 50px;
   margin-bottom: 5px;
   width: 265px;
 }
-
 .link-container {
   height: 100%;
   width: 90%;
@@ -83,34 +73,30 @@ a:link, a:visited, a:hover, a:active {
   align-items: center;
   padding: 0 55px 0 40px;
 }
-
 .link-container img {
   width: 40px;
   height: 40px;
 }
-
 .link-container a {
   font-weight: 500;
   font-size: 15px;
   margin: 0;
-  color: #7E87A1;
+  color: #7e87a1;
   width: 70px;
   height: 40px;
   display: flex;
   align-items: center;
 }
-
 .pane-container {
-  height: 50px!important;
+  height: 50px !important;
   width: 265px;
   display: flex;
   align-items: center;
   margin-bottom: 5px;
   display: block;
 }
-
 .pane-container-item {
-  height: 100%!important;
+  height: 100% !important;
   width: 90%;
   margin-right: auto;
   padding: 0;
@@ -119,13 +105,11 @@ a:link, a:visited, a:hover, a:active {
   padding: 0 10px 0 25px;
   justify-content: space-between;
 }
-
 .pane-container-item img {
   margin-right: 35px;
   width: 40px;
   height: 40px;
 }
-
 .pane-container-item a {
   font-weight: 500;
   font-size: 15px;
@@ -133,15 +117,36 @@ a:link, a:visited, a:hover, a:active {
   color: #7e87a1;
   height: 40px;
 }
-
+.trash-badge {
+  border-radius: 50px !important;
+  background: #ffffff !important;
+  padding: 0px !important;
+  border: 5px solid #FFE2E3;
+  height: 36px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.trash-badge span {
+  font-size: 10px;
+  background: #FF0000;
+  border-radius: 50px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #ffffff;
+  padding-top: 2px;
+}
 .storage-container {
   border-top: 1px solid #cccccc;
-  margin-top: 15px;
+  margin-top: 60px;
   flex-direction: column;
   width: 100%;
   padding-bottom: 20px;
+  padding-top: 10px;
 }
-
 .storage {
   padding-top: 20px;
   margin-top: 8%;
@@ -150,44 +155,40 @@ a:link, a:visited, a:hover, a:active {
   margin: 0 auto;
   justify-content: center;
 }
-
 .storage img {
   height: 25px;
   width: 25px;
   margin-top: -3px;
 }
-
 .storage p {
   margin-left: 10px;
   color: #7e87a1;
   font-weight: 600;
 }
-
 .ProgressBarDiv {
   width: 200px;
   margin-left: 30px;
   margin: 0 auto;
 }
-
 .progress-bar {
-  background-image: linear-gradient(to bottom,#4DA1FF 0,#3980d1 100%)!important;
+  background-image: linear-gradient(
+    to bottom,
+    #4da1ff 0,
+    #3980d1 100%
+  ) !important;
 }
-
 .progress {
   height: 7px !important;
 }
-
 .storage-para {
   font-size: 1.2rem;
   text-align: center;
   font-weight: 500;
 }
-
 #storage-para-p {
   font-size: 1.2rem;
   color: #7e87a1;
 }
-
 /* Mobile Styles */
 @media screen and (max-width: 400px) {
   .sidebar-container {
@@ -196,7 +197,6 @@ a:link, a:visited, a:hover, a:active {
     position: relative;
   }
 }
-
 /* Tablet Styles */
 @media screen and (max-width: 770px) {
   .sidebar-container {

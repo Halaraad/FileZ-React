@@ -12,60 +12,79 @@ class Home extends Component {
         <div class="home-main">
           <div class="home-header">
             <h1>FileZ</h1>
+            <div className="register-login">
+              <img src="/assets/images/key.png" width="15" height="15" />
+              <a href="/signup">Register</a>
+              <a href="/signin">Login</a>
+            </div>
           </div>
           <div class="description">
             <h1>FileZ</h1>
             <a href="#">
+              <img class="description-img" src="/assets/images/email.png" />
               Contact Us
             </a>
             <p>Keep your files online.</p>
           </div>
           <div class="lorem">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
-            vitae minus possimus, veniam mollitia dolore neque fugiat omnis quos
-            delectus eveniet officiis magnam! Odio provident tempore ipsa
-            maiores quasi repudiandae Odio provident tempore ipsa maiores quasi
-            repudiandae.
+            <p>FileZ is a cloud storage service operated for your company.</p>
+            <p>With FileZ free plan, you get 100 MB of free storage.</p>
           </div>
           <div class="packages">
             <h1>Filez Packages</h1>
             <div class="packages-container">
-              <div class="package border-r">
+              <div class="package border-b">
                 <div class="package-header">
                   <h2>Free Package</h2>
-                  <h2>$0.00</h2>
+                  <h2><img src="/assets/images/free.png" /> $0.00</h2>
                 </div>
                 <p class="package-p">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maxime vitae minus possimus, veniam mollitia dolore neque
-                  fugi.
+                Store up to <span className="bold">100</span> MegaBytes of free storage.
                 </p>
-                <div class="choose-center">
-                  <span class="package-choose">Current Package</span>
+                <div>
+                  <span class="package-choose b">Sign Up</span>
                 </div>
               </div>
-              <div class="package border-l">
+              <div class="package border-b">
                 <div class="package-header">
-                  <h2>Standard Package</h2>
-                  <h2>$0.00</h2>
+                  <h2>Economic Package</h2>
+                  <h2><img src="/assets/images/paid.png" /> $3.50</h2>
                 </div>
                 <p class="package-p">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maxime vitae minus possimus, veniam mollitia dolore neque
-                  fugiat omnis quos delectus eveniet.
+                  Store up to <span className="bold">1</span> GigaBytes of storage.
                 </p>
-                <div class="choose-center">
-                  <span class="package-choose">Up Coming</span>
+                <div>
+                  <span class="package-choose b">Sign Up & Upgrade</span>
+                </div>
+              </div>
+              <div class="package border-b">
+                <div class="package-header">
+                  <h2>Standard Package</h2>
+                  <h2><img src="/assets/images/paid.png" /> $7.00</h2>
+                </div>
+                <p class="package-p">
+                Store up to <span className="bold">10</span> GigaBytes of storage.
+                </p>
+                <div>
+                  <span class="package-choose b">Sign Up & Upgrade</span>
+                </div>
+              </div>
+              <div class="package border-b">
+                <div class="package-header">
+                  <h2>Business Package</h2>
+                  <h2><img src="/assets/images/paid.png" /> $12.00</h2>
+                </div>
+                <p class="package-p">
+                Store up to <span className="bold">100</span> GigaBytes of storage.
+                </p>
+                <div>
+                  <span class="package-choose b">Sign Up & Upgrade</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="buttons-img-container">
-            <img
-              class="buttons-img"
-              src="/assets/images/home.png"
-              width="300"
-            />
+            <img class="buttons-img" src="/assets/images/home.png" width="300" />
             <div class="buttons">
               <a class="buttons-btn" href="/signup">
                 Sign Up

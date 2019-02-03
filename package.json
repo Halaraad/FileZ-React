@@ -21,6 +21,8 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
+    "react-stripe-checkout": "^2.6.3",
+    "react-stripe-elements": "^2.0.3",
     "react-upload-progress": "0.0.2",
     "socket.io-client": "^2.2.0",
     "styled-components": "^4.1.3",

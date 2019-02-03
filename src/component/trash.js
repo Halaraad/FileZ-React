@@ -4,9 +4,9 @@ import { Row, Col } from "react-bootstrap";
 import Cookies from "universal-cookie";
 
 import Context from "./context.js";
-import Sidebar from "./sidebar";
+import Sidebar from "./sideBar";
 import Signin from "./signin";
-
+var host="http://localhost:5000/"
 const cookies = new Cookies();
 class Trash extends Component {
   constructor() {
@@ -45,7 +45,7 @@ class Trash extends Component {
                                         ? { display: "none" }
                                         : {}
                                     }
-                                    src={ `https://filez-node-v2.herokuapp.com/` + ctx.value.Session.porfileImg }/>
+                                    src={ host + ctx.value.Session.porfileImg }/>
                                 </span>
                                 <div className="dropdown-content">
                                   <div className="dropdown-header">
@@ -63,7 +63,7 @@ class Trash extends Component {
                                             ? { display: "none" }
                                             : {}
                                         }
-                                        src={ `https://filez-node-v2.herokuapp.com/` + ctx.value.Session.porfileImg }/>
+                                        src={ host + ctx.value.Session.porfileImg }/>
                                     </span>
                                     <div className="session-info-div">
                                       <span className="session-info">
@@ -146,7 +146,7 @@ class Trash extends Component {
                                           : { display: "none" }
                                       } />
                                     <img id="table-files-icon" src={ file.type == "image"
-                                          ? `https://filez-node-v2.herokuapp.com/` + file.FilePath
+                                          ? host + file.FilePath
                                           : "/assets/images/pdf.svg"
                                       }
                                       alt="img"
@@ -168,14 +168,14 @@ class Trash extends Component {
                                     <span className="table-body-row-span">{(file.size / 1000000).toFixed(3)} MB</span>
                                   </Table.TextCell>
 
-                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
+                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
                                     <IconButton className="download-border" icon="redo" intent="success"
                                       onClick={() => {
                                         ctx.actions.RecoveryFromTrash(file._id);
                                       }} />
                                   </Table.TextCell>
 
-                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
+                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
                                     <IconButton className="trash-border" icon="trash" intent="danger"
                                       onClick={() => {
                                         ctx.actions.DeleteFile(file._id);

@@ -16,9 +16,9 @@ import Home from "./component/home";
 import Openfolder from "./assets/images/openfolder.png";
 import FolderIcon from "./assets/images/folder.png";
 
+var host="http://localhost:5000/"
 var FolderIdCheck;
-var iconbuffer;
-var MyFilesCheck;
+
 
 const cookies = new Cookies();
 
@@ -42,6 +42,7 @@ class App extends Component {
       FilesSizeInfo: "",
       FilesNumber: "",
       TrashFiles: [],
+      FoldersPath: [],
       FilesInTrash: ""
     };
   }
@@ -50,24 +51,15 @@ class App extends Component {
     this.SocketData();
 
     axios
-      .get(`https://filez-node-v2.herokuapp.com/api/user/checklogin/`, {
+      .get(host+`api/user/checklogin/`, {
         headers: { token: cookies.get("token") }
       })
       .then(response => {
         // If request is good...
         if (response.data[1]) {
           //calculate limit for
-          let packageSize;
+          let packageSize=response.data[1].sesson.packageSize;
           var limit = response.data[1].sesson.limit;
-          if (response.data[1].sesson.package == "free") {
-            packageSize = 100000000;
-          } else if (response.data[1].sesson.package == "economic") {
-            packageSize = 1000000000;
-          } else if (response.data[1].sesson.package == "standard") {
-            packageSize = 10000000000;
-          } else if (response.data[1].sesson.package == "business") {
-            packageSize = 100000000000;
-          }
           var free = packageSize - limit;
           var rate = free / packageSize;
           var packagefree = rate * 100;
@@ -95,7 +87,7 @@ class App extends Component {
   }
   
   AdmainDataRequests() {
-    fetch(`https://filez-node-v2.herokuapp.com/api/user/admin/users`, {
+    fetch(host+`api/user/admin/users`, {
       credentials: "same-origin",
       headers: {
         token: cookies.get("token")
@@ -114,7 +106,7 @@ class App extends Component {
           });
         }
       });
-    fetch(`https://filez-node-v2.herokuapp.com/api/user/admin/filesinfo`, {
+    fetch(host+`api/user/admin/filesinfo`, {
       credentials: "same-origin",
       headers: {
         token: cookies.get("token")
@@ -138,7 +130,7 @@ class App extends Component {
   NetworkRequests(FolderIdCheck) {
     if (!FolderIdCheck) {
       axios
-        .get(`https://filez-node-v2.herokuapp.com/api/files/`, { headers: { token: cookies.get("token") } })
+        .get(host+`api/files/`, { headers: { token: cookies.get("token") } })
         .then(response => {
           // If request is good...
           if (response.data) {
@@ -158,17 +150,31 @@ class App extends Component {
         .catch(error => {
           console.log("error " + error);
         });
-    } else {
-      axios
-        .get(`https://filez-node-v2.herokuapp.com/api/files/folder/` + FolderIdCheck, {
-          headers: { token: cookies.get("token") }
-        })
+        axios .get(host+`api/folder/`, { headers: { token: cookies.get("token") } })
         .then(response => {
           // If request is good...
           if (response.data) {
             this.setState({
-              Files: response.data,
-              UnFilterFiles: response.data
+              Folders: response.data
+            });
+          }
+        })
+        .catch(error => {
+          console.log("error " + error);
+        });
+    } else {
+      axios
+        .get(host+`api/folder/folder/` + FolderIdCheck, {
+          headers: { token: cookies.get("token") }
+        })
+        .then(response => {
+          // If request is good...
+          // console.log(response.data)
+          if (response.data) {
+            this.setState({
+              Files: response.data[1].Files,
+              UnFilterFiles: response.data[1].Files,
+              Folders:response.data[0].Folder
             });
             FolderIdCheck = "";
             let fileNames = [];
@@ -185,22 +191,10 @@ class App extends Component {
         });
     }
 
-    axios
-      .get(`https://filez-node-v2.herokuapp.com/api/folder/`, { headers: { token: cookies.get("token") } })
-      .then(response => {
-        // If request is good...
-        if (response.data) {
-          this.setState({
-            Folders: response.data
-          });
-        }
-      })
-      .catch(error => {
-        console.log("error " + error);
-      });
+   
 
     axios
-      .get(`https://filez-node-v2.herokuapp.com/api/files/bin/`, { headers: { token: cookies.get("token") } })
+      .get(host+`api/files/bin/`, { headers: { token: cookies.get("token") } })
       .then(response => {
         // If request is good...
         if (response.data) {
@@ -215,16 +209,11 @@ class App extends Component {
       });
   }
 
-  changeFoldericon() {
-    if (document.getElementById("Openfolder")) {
-      document.getElementById("Openfolder").src = `${FolderIcon}`;
-      document.getElementById("Openfolder").id = iconbuffer;
-    }
-  }
+
 
   SocketData() {
     var io = openSocket.connect(
-      "https://filez-node-v2.herokuapp.com/",
+      host,
       {
         reconnection: true,
         reconnectionDelay: 1000,
@@ -288,17 +277,8 @@ class App extends Component {
       userLimitChangeIO(userLimitChange);
     });
     const userLimitChangeIO = userLimitChange => {
-      let packageSize;
+      let packageSize=userLimitChange.packageSize;
       var limit = userLimitChange.limit;
-      if (userLimitChange.package == "free") {
-        packageSize = 100000000;
-      } else if (userLimitChange.package == "economic") {
-        packageSize = 1000000000;
-      } else if (userLimitChange.package == "standard") {
-        packageSize = 10000000000;
-      } else if (userLimitChange.package == "business") {
-        packageSize = 100000000000;
-      }
       var free = packageSize - limit;
       var rate = free / packageSize;
       var packagefree = rate * 100;
@@ -342,7 +322,8 @@ class App extends Component {
       }, []);
       this.setState({
         Files: Files.filter(Files => Files._id !== data._id),
-        TrashFiles: uniqueTrashFiles
+        TrashFiles: uniqueTrashFiles,
+        FilesInTrash:this.state.FilesInTrash+1
       });
     });
 
@@ -363,7 +344,8 @@ class App extends Component {
       }, []);
       this.setState({
         TrashFiles: TrashFiles.filter(Files => Files._id !== data._id),
-        Files: uniqueFiles
+        Files: uniqueFiles,
+        FilesInTrash:this.state.FilesInTrash-1
       });
     });
     io.on("DeletedFile", data => {
@@ -371,7 +353,8 @@ class App extends Component {
       this.setState({
         TrashFiles: TrashFiles.filter(Files => Files._id !== data._id),
         FilesNumber: this.state.FilesNumber - 1,
-        FilesSizeInfo: this.state.FilesSizeInfo - data.size
+        FilesSizeInfo: this.state.FilesSizeInfo - data.size,
+        FilesInTrash:this.state.FilesInTrash-1
       });
     });
   }
@@ -391,14 +374,14 @@ class App extends Component {
                 };
 
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/files/bin/add/` + value,
+                  url: host+`api/files/bin/add/` + value,
                   method: "POST",
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
                       toaster.success(
-                        "Folder has been Move To Trash Successfully"
+                        "File has been moved to trash successfully"
                       );
                       if (FolderIdCheck) {
                         this.NetworkRequests(FolderIdCheck);
@@ -421,14 +404,14 @@ class App extends Component {
                 formData.append("folder", folder_id);
 
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/files/move/` + file_id,
+                  url: host+`api/files/move/` + file_id,
                   method: "POST",
                   data: formData,
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("file has been  moved Successfully");
+                      toaster.success("File has been moved Successfully");
                       if (FolderIdCheck) {
                         this.NetworkRequests(FolderIdCheck);
                       } else {
@@ -442,19 +425,11 @@ class App extends Component {
                   });
               },
               OpenFolder: value => {
-                this.changeFoldericon();
-                document.getElementById(`${value}`).src = `${Openfolder}`;
-                document.getElementById(`${value}`).id = "Openfolder";
-                iconbuffer = value;
                 FolderIdCheck = value;
                 this.NetworkRequests(FolderIdCheck);
               },
               CloseFolder: value => {
-                if (document.getElementById("Openfolder")) {
-                  document.getElementById("Openfolder").src = `${FolderIcon}`;
-                  document.getElementById("Openfolder").id = iconbuffer;
-                }
-                iconbuffer = "";
+
                 FolderIdCheck = "";
                 this.NetworkRequests(FolderIdCheck);
               },
@@ -556,20 +531,26 @@ class App extends Component {
 
                 // this.componentDidMount();
               },
+              test: value => {
+               this.NetworkRequests(value)
+
+                // this.componentDidMount();
+              },
               ReCallcomponentDidMount: value => {
                 this.componentDidMount();
               },
-              UpgradedPackage: value => {
+              UpgradedPackage: (token,Package) => {
+
                 let formData = new FormData();
                 var headers = {
                   "Content-Type": "application/json",
                   token: cookies.get("token")
                 };
 
-                formData.append("package", value);
-
+                formData.append("stripeToken", token.id);
+                formData.append("package", Package);
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/user/updatePackage/`,
+                  url: host+`api/user/updatePackage/`,
                   method: "POST",
                   data: formData,
                   headers: headers
@@ -592,13 +573,13 @@ class App extends Component {
                   token: cookies.get("token")
                 };
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/folder/` + value,
+                  url: host+`api/folder/` + value,
                   method: "Delete",
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("Folder has been  Delete Successfully");
+                      toaster.success("Folder has been Deleted successfully");
                       document.getElementById("deleteFolder").style.display =
                         "none";
                       document.getElementById("undoFolder").style.display =
@@ -614,17 +595,18 @@ class App extends Component {
                     }
                   });
               },
-              AddNewFolder: FolderName => {
+              AddNewFolder: (FolderName,FolderID) => {
                 let formData = new FormData();
                 var headers = {
                   "Content-Type": "application/json",
                   token: cookies.get("token")
                 };
-
                 formData.append("name", FolderName);
-
+                if (FolderID) {
+                  formData.append("folder", FolderID);
+                }
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/folder/add`,
+                  url: host+`api/folder/add`,
                   method: "POST",
                   data: formData,
                   headers: headers
@@ -632,7 +614,7 @@ class App extends Component {
                   .then(response => {
                     if (response.status == 200) {
                       toaster.success("Folder has been added successfully");
-                      this.NetworkRequests();
+                      this.NetworkRequests(FolderID);
                     }
                   })
                   .catch(function(error) {
@@ -652,7 +634,7 @@ class App extends Component {
                 formData.append("password", AdminPassword);
 
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/user/admin/add`,
+                  url: host+`api/user/admin/add`,
                   method: "POST",
                   data: formData,
                   headers: headers
@@ -669,7 +651,7 @@ class App extends Component {
                     } else if (error.response.data.details[0].message) {
                       toaster.danger(error.response.data.details[0].message);
                     } else {
-                      toaster.danger("Sorry you are not A Admin");
+                      toaster.danger("Sorry you are not an admin");
                     }
                     console.log(error);
                   });
@@ -681,13 +663,13 @@ class App extends Component {
                 };
 
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/user/admin/deleteUser/` + value,
+                  url: host+`api/user/admin/deleteUser/` + value,
                   method: "delete",
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("User has been Delete Successfully");
+                      toaster.success("User has been Deleted successfully");
                       this.componentDidMount();
                     }
                   })
@@ -705,14 +687,14 @@ class App extends Component {
                 formData.append("name", UserName);
                 formData.append("file", ProfilePicture);
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/user/update/`,
+                  url: host+`api/user/update/`,
                   method: "POST",
                   data: formData,
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("Your profile update successfully");
+                      toaster.success("Your profile has been updated successfully");
                       this.componentDidMount();
                     }
                   })
@@ -729,13 +711,13 @@ class App extends Component {
                   token: cookies.get("token")
                 };
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/files/bin/` + value,
+                  url: host+`api/files/bin/` + value,
                   method: "POST",
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("file has been Recovery Successfully");
+                      toaster.success("File has been recovered successfully");
                       this.NetworkRequests();
                     }
                   })
@@ -750,13 +732,13 @@ class App extends Component {
                   token: cookies.get("token")
                 };
                 axios({
-                  url: `https://filez-node-v2.herokuapp.com/api/files/bin/` + value,
+                  url: host+`api/files/bin/` + value,
                   method: "delete",
                   headers: headers
                 })
                   .then(response => {
                     if (response.status == 200) {
-                      toaster.success("file has been Delete Successfully");
+                      toaster.success("File has been deleted successfully");
                       this.componentDidMount();
                     }
                   })
