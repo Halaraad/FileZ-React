@@ -168,14 +168,14 @@ class Trash extends Component {
                                     <span className="table-body-row-span">{(file.size / 1000000).toFixed(3)} MB</span>
                                   </Table.TextCell>
 
-                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
+                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
                                     <IconButton className="download-border" icon="redo" intent="success"
                                       onClick={() => {
                                         ctx.actions.RecoveryFromTrash(file._id);
                                       }} />
                                   </Table.TextCell>
 
-                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0} className="textcell-padding">
+                                  <Table.TextCell flexBasis={55} flexShrink={0} flexGrow={0}>
                                     <IconButton className="trash-border" icon="trash" intent="danger"
                                       onClick={() => {
                                         ctx.actions.DeleteFile(file._id);
