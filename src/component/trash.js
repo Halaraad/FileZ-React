@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import Cookies from "universal-cookie";
 
 import Context from "./context.js";
-import Sidebar from "./sideBar";
+import Sidebar from "./sidebar";
 import Signin from "./signin";
 var host="http://localhost:5000/"
 const cookies = new Cookies();

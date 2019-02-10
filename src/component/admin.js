@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 import Component from "@reactions/component";
 import MyFiles from "./myFiles";
 import Context from "./context.js";
-import Sidebar from "./sideBar";
+import Sidebar from "./sidebar";
 import Signin from "./signin";
 var host="http://localhost:5000/"
 

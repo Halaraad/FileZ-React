@@ -8,7 +8,7 @@ import Component from "@reactions/component";
 import styled from "styled-components";
 import ItemsCarousel from "react-items-carousel";
 import Cookies from "universal-cookie";
-import Sidebar from "./sideBar";
+import Sidebar from "./sidebar";
 import Signin from "./signin";
 import Context from "./context.js";
 import StripeCheckout from 'react-stripe-checkout';
